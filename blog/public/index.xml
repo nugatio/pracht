@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>My New Hugo Siteee</title>
-    <link>http://localhost:1313/</link>
+    <link>https://example.org/</link>
     <description>Recent content on My New Hugo Siteee</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 16 Jul 2024 16:14:31 +0200</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://example.org/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Zwischen Auftrag und Kritik: Die Metamorphose des deutschen Rundfunks</title>
-      <link>http://localhost:1313/1/</link>
+      <link>https://example.org/1/</link>
       <pubDate>Tue, 16 Jul 2024 16:14:31 +0200</pubDate>
-      <guid>http://localhost:1313/1/</guid>
+      <guid>https://example.org/1/</guid>
       <description>&amp;raquo; In den Trümmern des Zweiten Weltkriegs, als Deutschland am Boden lag und seine Zukunft ungewiss war, entstand eine Institution, die das Informationslandschaft der Bundesrepublik für die kommenden Jahrzehnte prägen sollte: der öffentlich-rechtliche Rundfunk. Geboren aus dem Wunsch der Alliierten, ein demokratisches und unabhängiges Mediensystem zu etablieren, sollte er ein Bollwerk gegen Propaganda und politische Einflussnahme sein. Doch wie so oft in der Geschichte, erwies sich der Weg von der Idee zur Realität als kompliziert und voller Herausforderungen.</description>
     </item>
   </channel>
