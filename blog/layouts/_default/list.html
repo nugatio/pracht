@@ -1,0 +1,22 @@
+{{ define "main" }}
+<div class="list">
+    {{ range .Paginator.Pages }}
+        <div class="listItem">
+            <a href={{.Permalink}} class="listItemLink">
+                <div class="listItemContainer">
+                    <div class="listItemTitleBox">
+                        <h1 class="listItemTitle">
+                            {{ .Title }}
+                        </h1>
+                    </div>
+                    <div class="listItemSubtitleBox">
+                        <h3 class="listItemSubtitle">
+                            {{ .Params.Subtitle }}
+                        </h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+    {{ end }}
+</div>
+{{ end }}

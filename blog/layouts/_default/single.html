@@ -1,0 +1,23 @@
+{{ define "main" }}
+<div class="single">
+    <div class="listItemContainer">
+        <div class="listItemTitleBox">
+            <h1 class="listItemTitle">
+                {{ .Title }}
+            </h1>
+        </div>
+        <div class="listItemSubtitleBox">
+            <h3 class="listItemSubtitle">
+                {{ .Params.Subtitle }}
+            </h3>
+        </div>
+        <div class="content">
+            <div class="article">{{.Content}}</div>
+            <div class="contentFooter">
+                <time>{{ dateFormat .Site.Params.dateFormat .Date }}</time>
+                <h3 class="author">— NB</h3>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
