@@ -1,6 +1,6 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Siteee'
+baseURL = 'https://pracht.report/'
+languageCode = 'de-de'
+title = 'pracht'
 
 [params]
   dateFormat = "02.01.2006"
