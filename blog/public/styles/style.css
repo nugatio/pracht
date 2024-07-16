@@ -2,10 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Playwrite+HR:wght@100..400&display=swap');
 
 :root{
-    --bg: #FAF8F2;
-    --bgs: #D4D1C9;
-    --txt: #000000;
-    --sb: #333333;
+    --b: #FEFCFA;
+    --s: #DEDCDA;
+    --t: #000000;
+    --d: #444444;
+    --n: #CC00AA;
 }
 
 *{
@@ -15,12 +16,12 @@
     font-size: 15px;
     letter-spacing: -0.5px;
     word-spacing: -1.25px;
-    line-height: 115%;
+    line-height: 120%;
 }
 
 body{
-    background: var(--bg);
-    color: var(--txt);
+    background: var(--b);
+    color: var(--t);
 }
 
 .container{
@@ -33,19 +34,23 @@ body{
 }
 
 .navbar{
+    display: flex;
     padding: 2px;
-    background: var(--bgs);
+    background: var(--s);
     margin-bottom: 25px;
+    gap: 10px;
 }
 
 .footer{
+    display: flex;
     padding: 2px;
-    background: var(--bgs);
+    background: var(--s);
     margin-top: 25px;
+    gap: 10px;
 }
 
 .listItemTitleBox{
-    border-bottom: solid 1px var(--sb);
+    border-bottom: solid 1px var(--d);
     padding-bottom: 1px;
     margin-bottom: 10px;
 }
@@ -56,12 +61,12 @@ h1{
 
 h3{
     font-weight: 500;
-    color: var(--sb);
+    color: var(--d);
 }
 
 .listItemLink{
     text-decoration: none;
-    color: var(--txt);
+    color: var(--t);
 }
 
 .listItem{
@@ -92,4 +97,12 @@ p{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     letter-spacing: -1px;
+}
+
+.linkText{
+    color: var(--n);
+}
+
+a{
+    text-decoration: none;
 }
