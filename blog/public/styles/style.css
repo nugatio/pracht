@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Playwrite+HR:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fira+Mono:wght@400;500;700&display=swap');
 
 :root{
     --b: #FEFCFA;
@@ -13,19 +13,19 @@
     margin: 0;
     box-sizing: border-box;
     font-family: "Fira Mono", monospace;
-    font-size: 15px;
     letter-spacing: -0.5px;
     word-spacing: -1.25px;
-    line-height: 120%;
+    line-height: 130%;
 }
 
 body{
+    font-size: 17px;
     background: var(--b);
     color: var(--t);
 }
 
 .container{
-    max-width: 80ch;
+    max-width: 70ch;
     padding-top: 20px;
     padding-left: 10px;
     padding-right: 10px;
@@ -49,18 +49,26 @@ body{
     gap: 10px;
 }
 
+.listItemSubtitle{
+    font-size: 16px;
+}
+
+.listItemContainer{
+    text-align: justify;
+}
+
 .listItemTitleBox{
     border-bottom: solid 1px var(--d);
-    padding-bottom: 1px;
     margin-bottom: 10px;
 }
 
 h1{
     font-weight: 700;
+    font-size: 17px;
 }
 
 h3{
-    font-weight: 500;
+    font-weight: 400;
     color: var(--d);
 }
 
@@ -83,12 +91,13 @@ h3{
 }
 
 p{
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 400;
     margin-bottom: 10px;
 }
 
 .contentFooter{
+    font-size: 15px;
     display: flex;
     justify-content: space-between;
 }
@@ -100,6 +109,7 @@ p{
 }
 
 .linkText{
+    font-size: 15px;
     color: var(--n);
 }
 
