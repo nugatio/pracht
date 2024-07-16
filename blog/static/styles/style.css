@@ -53,10 +53,6 @@ body{
     font-size: 16px;
 }
 
-.listItemContainer{
-    text-align: justify;
-}
-
 .listItemTitleBox{
     border-bottom: solid 1px var(--d);
     margin-bottom: 10px;
