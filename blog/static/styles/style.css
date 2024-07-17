@@ -32,11 +32,6 @@ body{
     margin: auto;
 }
 
-.separator{
-    height: 5px;
-    background: var(--s);
-}
-
 .navbar{
     display: flex;
     padding: 2px;
@@ -81,10 +76,6 @@ h3{
     margin-bottom: 20px;
 }
 
-.content{
-    margin-top: 25px;
-}
-
 .article{
     white-space: pre-wrap;
     text-align: justify;
@@ -125,3 +116,11 @@ a{
     margin-left: auto;
     margin-top: auto;
 }
+
+div#stripes {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 15px;
+    background-image: linear-gradient(135deg, var(--s) 25%, transparent 25%, transparent 50%, var(--s) 50%, var(--s) 75%, transparent 75%, #fff);
+    background-size: 25px 25px;
+  }
