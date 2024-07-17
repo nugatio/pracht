@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
     --b: #FEFCFA;
@@ -81,22 +82,78 @@ h3{
     text-align: justify;
 }
 
+.content{
+    margin-top: 25px;
+}
+
 p{
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 25px;
 }
 
+.no{
+    font-family: "Public Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    word-spacing: 1.5px;
+    color: var(--d);
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.neo{
+    font-family: "Public Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    word-spacing: 1.5px;
+    font-size: 15px;
+    color: var(--n);
+
+}
+
+.length{
+    font-family: "Public Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    word-spacing: 1.5px;
+    color: var(--d);
+    flex-grow: 1;
+    flex-basis: 0;
+    text-align: right;
+}
+
+.topbar{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
 .contentFooter{
-    font-size: 16px;
+    font-family: "Public Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    word-spacing: 1.5px;
     display: flex;
     justify-content: space-between;
 }
 
 .author{
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    letter-spacing: -1px;
+    font-family: "Public Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 15px;
+    word-spacing: 0px;
+    letter-spacing: -1.5px;
+    color: var(--d);
 }
 
 .linkText{
@@ -118,9 +175,19 @@ a{
 }
 
 div#stripes {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    height: 15px;
+    margin-bottom: 5px;
+    margin-top: 25px;
+    height: 10px;
     background-image: linear-gradient(135deg, var(--s) 25%, transparent 25%, transparent 50%, var(--s) 50%, var(--s) 75%, transparent 75%, #fff);
     background-size: 25px 25px;
-  }
+}
+
+time{
+    font-family: "Public Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    word-spacing: 1.5px;
+    color: var(--d);
+}  

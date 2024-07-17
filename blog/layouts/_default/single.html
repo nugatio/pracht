@@ -1,6 +1,19 @@
 {{ define "main" }}
 <div class="single">
     <div class="listItemContainer">
+        <div id="stripes">
+        </div>
+        <div class="topbar">
+            <div class="no">
+                Ausgabe {{ .Params.No }}
+            </div>
+            <div class="neo">
+                [{{ .Params.Edition }}]
+            </div>
+            <div class="length">
+                {{ .Content | strings.Count "" }} Zeichen
+            </div>
+        </div>
         <div class="listItemTitleBox">
             <h1 class="listItemTitle">
                 {{ .Title }}
@@ -8,15 +21,13 @@
         </div>
         <div class="listItemSubtitleBox">
             <h3 class="listItemSubtitle">
-                ❯❯ {{ .Params.Subtitle }}
+                {{ .Params.Subtitle }}
             </h3>
-        </div>
-        <div id="stripes">
         </div>
         <div class="content">
             <div class="article">{{.Content}}</div>
             <div class="contentFooter">
-                <time>{{ dateFormat .Site.Params.dateFormat .Date }}</time>
+                <time class="time">{{ dateFormat .Site.Params.dateFormat .Date }}</time>
                 <h3 class="author">— NB</h3>
             </div>
         </div>
