@@ -11,7 +11,7 @@
                 [{{ .Params.Edition }}]
             </div>
             <div class="length">
-                {{ .Content | strings.Count "" }} Zeichen
+                {{ .Content | countwords }} Zeichen
             </div>
         </div>
         <div class="listItemTitleBox">
