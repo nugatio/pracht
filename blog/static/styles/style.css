@@ -45,7 +45,6 @@ body{
     display: flex;
     padding: 2px;
     background: var(--s);
-    margin-top: 25px;
     gap: 10px;
 }
 
@@ -74,7 +73,7 @@ h3{
 }
 
 .listItem{
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .article{
@@ -190,4 +189,10 @@ time{
     font-size: 15px;
     word-spacing: 1.5px;
     color: var(--d);
-}  
+}
+
+.slug{
+    margin-top: 25px;
+    font-size: 9px;
+    text-align: center;
+}
