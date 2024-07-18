@@ -77,7 +77,8 @@ h3{
 }
 
 .article{
-    white-space: pre-wrap;
+    display: inline-block;
+    white-space: wrap;
     text-align: justify;
 }
 
