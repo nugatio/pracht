@@ -1,38 +1,40 @@
 {{ define "main" }}
 <div class="single">
-    <div class="listItemContainer">
+    <div class="contentContainer">
         <div id="stripes">
         </div>
-        <div class="topbar">
-            <div class="no">
-                Beitrag {{ .Params.No }}
+        <div class="informationBar">
+            <div class="articleNumber">
+                Beitrag {{ .Params.Number }}
             </div>
-            <div class="neo">
+            <div class="edition">
                 [{{ .Params.Edition }}]
             </div>
-            <div class="length">
+            <div class="wordCount">
                 {{ .Content | countwords }} Wörter
             </div>
         </div>
-        <div class="listItemTitleBox">
-            <h1 class="listItemTitle">
-                {{ .Title }}
-            </h1>
-        </div>
-        <div class="listItemSubtitleBox">
-            <h3 class="listItemSubtitle">
-                {{ .Params.Subtitle }}
-            </h3>
-        </div>
-        <div class="content">
-            <div class="article">{{.Content}}</div>
-            <div class="contentFooter">
-                <time class="time">{{ dateFormat .Site.Params.dateFormat .Date }}</time>
-                <div class="slug">
-                    [{{ .Slug }}]
+        <div class="articleHead">
+            <div class="articleHeadContainer">
+                <div class="articleTitleBox">
+                    <h2 class="articleTitle">
+                        {{ .Title }}
+                    </h2>
                 </div>
-                <h3 class="author">— NB</h3>
+                <div class="articleSubtitleBox">
+                    <h3 class="articleSubtitle">
+                        {{ .Params.Subtitle }}
+                    </h3>
+                </div>
             </div>
+        </div>
+        <div class="articleContent">{{.Content}}</div>
+        <div class="informationBar">
+            <time class="time">{{ dateFormat .Site.Params.dateFormat .Date }}</time>
+            <div class="id">
+                [{{ .Slug }}]
+            </div>
+            <h3 class="author">— NB</h3>
         </div>
     </div>
 </div>

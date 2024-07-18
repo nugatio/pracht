@@ -12,24 +12,45 @@
 *{
     margin: 0;
     box-sizing: border-box;
-    font-family: "Fira Mono", monospace;
-    letter-spacing: -0.5px;
-    word-spacing: -1.25px;
-    line-height: 130%;
 }
 
 body{
     font-size: 19px;
     background: var(--b);
     color: var(--t);
+    font-family: "Fira Mono", monospace;
+    letter-spacing: -0.5px;
+    word-spacing: -1.25px;
+    line-height: 130%;
+}
+
+h2{
+    font-weight: 700;
+    font-size: 20px;
+}
+
+h3{
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--d);
+}
+
+p{
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    letter-spacing: -0.5px;
+    word-spacing: -1.25px;
+    line-height: 130%;
+}
+
+a{
+    text-decoration: none;
 }
 
 .container{
     max-width: 70ch;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
+    padding: 20px;
     margin: auto;
 }
 
@@ -37,8 +58,8 @@ body{
     display: flex;
     padding: 2px;
     background: var(--s);
-    margin-bottom: 25px;
     gap: 10px;
+    margin-bottom: 25px;
 }
 
 .footer{
@@ -49,101 +70,79 @@ body{
     margin-top: 25px;
 }
 
-.listItemSubtitle{
-    font-size: 18px;
+.linkText{
+    font-size: 17px;
+    color: var(--n);
 }
 
-.listItemTitleBox{
+.copyright{
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 13px;
+    margin-left: auto;
+    margin-top: auto;
+}
+
+.articleHead{
+    margin-bottom: 35px;
+    margin-top: 20px;
+}
+
+.articleHeadList{
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.articleLink{
+    color: var(--t);
+}
+
+.articleTitleBox{
     border-bottom: solid 1px var(--d);
     margin-bottom: 10px;
 }
 
-h1{
-    font-weight: 700;
-    font-size: 20px;
+div#stripes {
+    height: 10px;
+    background-image: linear-gradient(135deg, var(--s) 25%, transparent 25%, transparent 50%, var(--s) 50%, var(--s) 75%, transparent 75%, #fff);
+    background-size: 25px 25px;
 }
 
-h3{
-    font-weight: 400;
-    color: var(--d);
-}
-
-.listItemLink{
-    text-decoration: none;
-    color: var(--t);
-}
-
-.listItem{
-    margin-bottom: 20px;
-}
-
-.article{
-    display: inline-block;
-    white-space: wrap;
-    text-align: justify;
-}
-
-.content{
-    margin-top: 25px;
-}
-
-p{
-    font-size: 16px;
-    font-weight: 400;
-    margin-bottom: 15px;
-}
-
-.no{
+.informationBar{
     font-family: "Public Sans", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-    font-size: 15px;
     word-spacing: 1.5px;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.articleNumber{
     color: var(--d);
     flex-grow: 1;
     flex-basis: 0;
 }
 
-.neo{
-    font-family: "Public Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    word-spacing: 1.5px;
-    font-size: 15px;
+.edition{
     color: var(--n);
 
 }
 
-.length{
-    font-family: "Public Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 15px;
-    word-spacing: 1.5px;
+.wordCount{
     color: var(--d);
     flex-grow: 1;
     flex-basis: 0;
     text-align: right;
 }
 
-.topbar{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.contentFooter{
-    font-family: "Public Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 15px;
-    word-spacing: 1.5px;
-    display: flex;
-    justify-content: space-between;
+.articleContent{
+    display: inline-block;
+    white-space: wrap;
+    text-align: justify;
 }
 
 .author{
@@ -160,45 +159,13 @@ p{
     text-align: right;
 }
 
-.linkText{
-    font-size: 17px;
-    color: var(--n);
-}
-
-a{
-    text-decoration: none;
-}
-
-.bottom{
-    font-family: "Titillium Web", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 13px;
-    margin-left: auto;
-    margin-top: auto;
-}
-
-div#stripes {
-    margin-bottom: 5px;
-    margin-top: 25px;
-    height: 10px;
-    background-image: linear-gradient(135deg, var(--s) 25%, transparent 25%, transparent 50%, var(--s) 50%, var(--s) 75%, transparent 75%, #fff);
-    background-size: 25px 25px;
-}
-
-time{
-    font-family: "Public Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 15px;
-    word-spacing: 1.5px;
+.time{
     color: var(--d);
     flex-grow: 1;
     flex-basis: 0;
 }
 
-.slug{
+.id{
     margin-top: auto;
-    font-size: 9px;
+    font-size: 10px;
 }
