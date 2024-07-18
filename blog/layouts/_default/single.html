@@ -28,11 +28,11 @@
             <div class="article">{{.Content}}</div>
             <div class="contentFooter">
                 <time class="time">{{ dateFormat .Site.Params.dateFormat .Date }}</time>
+                <div class="slug">
+                    [{{ .Slug }}]
+                </div>
                 <h3 class="author">— NB</h3>
             </div>
-        </div>
-        <div class="slug">
-            {{ .Slug }}
         </div>
     </div>
 </div>
