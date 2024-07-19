@@ -25,6 +25,14 @@ body{
     line-height: 130%;
 }
 
+body.dark{
+    --b: #111111;
+    --s: #333333;
+    --t: #FEFCFA;
+    --d: #DEDCDA;
+    --n: #CC00AA;
+}
+
 h2{
     font-weight: 700;
     font-size: 20px;
@@ -47,6 +55,17 @@ p{
 
 a{
     text-decoration: none;
+}
+
+.toggle{
+    -webkit-user-select: none;       
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    font-size: 17px;
+    color: var(--n);
+    margin-left: auto;
 }
 
 .container{
