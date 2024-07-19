@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Medien on pracht</title>
+    <link>http://localhost:1313/categories/medien/</link>
+    <description>Recent content in Medien on pracht</description>
+    <generator>Hugo</generator>
+    <language>de-de</language>
+    <lastBuildDate>Wed, 17 Jul 2024 20:00:00 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/medien/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Die Propagandamaschine der Republik</title>
+      <link>http://localhost:1313/0925629cbc/</link>
+      <pubDate>Wed, 17 Jul 2024 20:00:00 +0200</pubDate>
+      <guid>http://localhost:1313/0925629cbc/</guid>
+      <description>Im Schatten der Nachkriegstrümmer erblickte ein Medienimperium das Licht der Welt, das bis heute tief in den Taschen der Bürger wühlt: die öffentlich-rechtlichen Rundfunkanstalten. Unter dem Deckmantel der &amp;ldquo;Umerziehung&amp;rdquo; von den Alliierten ins Leben gerufen, mauserten sich ARD, ZDF und Co. zu einem Medienkoloss, dessen Pracht selbst die kühnsten Träume der Nachkriegsplaner in den Schatten stellt.&#xA;1950 schlug die Stunde Null für die ARD. Offiziell als Bollwerk der Demokratie gepriesen, entpuppte sie sich als subtiles Instrument zur Lenkung der öffentlichen Meinung.</description>
+    </item>
+  </channel>
+</rss>

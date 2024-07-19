@@ -14,6 +14,14 @@
                 {{ .Content | countwords }} Wörter
             </div>
         </div>
+        <div class="categoryList">
+            Themen
+            {{ range (.GetTerms "categories") }}
+                <div class="categoryItem">
+                    [<a class="categoryItemLink" href={{ .Permalink }}>{{ .Name }}</a>]
+                </div>
+            {{ end }}
+        </div>
         <div class="articleHead">
             <div class="articleHeadContainer">
                 <div class="articleTitleBox">

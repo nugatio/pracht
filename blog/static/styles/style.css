@@ -55,6 +55,10 @@ p{
 
 a{
     text-decoration: none;
+    -webkit-user-select: none;       
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .toggle{
@@ -79,6 +83,10 @@ a{
 }
 
 .logo{
+    -webkit-user-select: none;       
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     display: flex;
     justify-content: center;
     gap: 15px;
@@ -156,7 +164,7 @@ div#stripes {
     font-size: 15px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 2px;
 }
 
 .articleNumber{
@@ -168,6 +176,68 @@ div#stripes {
 .edition{
     color: var(--n);
 
+}
+
+.categoryList{
+    font-family: "Public Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    word-spacing: 1.5px;
+    font-size: 15px;
+    line-height: 80%;
+    display: flex;
+    gap: 7px;
+    margin-bottom: 25px;
+}
+
+.categoryItem{
+    background: var(--s);
+    color: var(--d);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.categoryItem:hover{
+    background: var(--n);
+    color: var(--s);
+}
+
+.categoryItemLink{
+    color: inherit;
+}
+
+.pagination{
+    font-family: "Public Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    word-spacing: 1.5px;
+    font-size: 15px;
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+.page-link{
+    color: inherit;
+}
+
+.page-item{
+    color: var(--d);
+    text-decoration: none;
+}
+
+.page-item.active{
+    color: var(--n);
+    text-decoration: none;
+}
+
+.page-item.disabled{
+    color: var(--s);
+    cursor: not-allowed;
 }
 
 .wordCount{
