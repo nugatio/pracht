@@ -82,17 +82,12 @@ a{
     display: block;
 }
 
-.logoLink{
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
+.logo{
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-}
-
-.logo{
     display: flex;
     justify-content: center;
     gap: 15px;
@@ -103,7 +98,8 @@ a{
     background: var(--n);
     line-height: 100%;
     color: var(--b);
-    padding: 10px;
+    padding-top: 18px;
+    padding-bottom: 20px;
     letter-spacing: -4px;
 }
 
