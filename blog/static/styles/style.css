@@ -101,7 +101,7 @@ a{
     font-size: 50px;
     text-align: center;
     background: var(--n);
-    line-height: 130%;
+    line-height: 100%;
     color: var(--b);
     padding: 10px;
     letter-spacing: -4px;
