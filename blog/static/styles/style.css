@@ -84,7 +84,7 @@ a{
 }
 
 .navbar{
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     display: block;
 }
 
@@ -118,7 +118,7 @@ a{
     padding: 2px;
     background: var(--s);
     gap: 10px;
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 .linkText{
@@ -127,9 +127,8 @@ a{
 }
 
 .articleHead{
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     margin-top: 20px;
-    border-bottom: 1.5px solid var(--s);
 }
 
 .articleHeadList:not(:last-child){
@@ -270,4 +269,25 @@ div#stripes {
 .id{
     margin-top: auto;
     font-size: 10px;
+}
+
+.articleImage{
+    width: 100%;
+}
+
+.articleImageBox{
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid var(--s);
+    margin-bottom: 15px;
+}
+
+.articleImageAlt{
+    font-family: "Public Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    word-spacing: 1px;
+    font-size: 12px;
+    line-height: 105%;
+    text-align: justify;
 }

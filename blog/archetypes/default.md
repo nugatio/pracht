@@ -6,4 +6,6 @@ draft = false
 slug = ''
 number = '1'
 edition = 'die meinung'
+image = ''
+alt = ''
 +++
