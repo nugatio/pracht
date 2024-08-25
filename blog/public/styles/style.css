@@ -127,8 +127,9 @@ a{
 }
 
 .articleHead{
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     margin-top: 20px;
+    border-bottom: 1.5px solid var(--s);
 }
 
 .articleHeadList:not(:last-child){
@@ -273,21 +274,4 @@ div#stripes {
 
 .articleImage{
     width: 100%;
-}
-
-.articleImageBox{
-    padding-bottom: 10px;
-    border-bottom: 1.5px solid var(--s);
-    margin-bottom: 15px;
-}
-
-.articleImageAlt{
-    font-family: "Public Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    word-spacing: 1px;
-    font-size: 12px;
-    line-height: 105%;
-    text-align: justify;
 }
