@@ -129,6 +129,7 @@ a{
 .articleHead{
     margin-bottom: 15px;
     margin-top: 20px;
+    padding-bottom: 5px;
     border-bottom: 1.5px solid var(--s);
 }
 
