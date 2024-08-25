@@ -25,8 +25,8 @@ body{
     background: var(--b);
     color: var(--t);
     font-family: "Fira Mono", monospace;
-    letter-spacing: -0.5px;
-    word-spacing: -1.25px;
+    letter-spacing: -0.6px;
+    word-spacing: -4px;
     line-height: 130%;
 }
 
@@ -41,6 +41,7 @@ body.dark{
 h2{
     font-weight: 700;
     font-size: 20px;
+    margin-bottom: 2px;
 }
 
 h3{
