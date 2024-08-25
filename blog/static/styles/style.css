@@ -6,7 +6,7 @@
     --b: #FEFCFA;
     --s: #DEDCDA;
     --t: #000000;
-    --d: #444444;
+    --d: #777777;
     --n: #CC00AA;
 }
 
@@ -45,7 +45,7 @@ h2{
 
 h3{
     font-weight: 400;
-    font-size: 18px;
+    font-size: 17px;
     color: var(--d);
 }
 
@@ -125,32 +125,21 @@ a{
     color: var(--n);
 }
 
-.copyright{
-    font-family: "Titillium Web", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 13px;
-    margin-left: auto;
-    margin-top: auto;
-}
-
 .articleHead{
-    margin-bottom: 35px;
+    margin-bottom: 15px;
     margin-top: 20px;
+    border-bottom: 1.5px solid var(--s);
 }
 
-.articleHeadList{
-    margin-bottom: 25px;
-    margin-top: 25px;
+.articleHeadList:not(:last-child){
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1.5px solid var(--s);
 }
 
 .articleLink{
     color: var(--t);
-}
-
-.articleTitleBox{
-    border-bottom: solid 1px var(--d);
-    margin-bottom: 10px;
 }
 
 div#stripes {
@@ -172,7 +161,7 @@ div#stripes {
 }
 
 .articleNumber{
-    color: var(--d);
+    color: var(--t);
     flex-grow: 1;
     flex-basis: 0;
 }
@@ -197,13 +186,13 @@ div#stripes {
 
 .categoryItem{
     background: var(--s);
-    color: var(--d);
+    color: var(--t);
     padding-left: 10px;
     padding-right: 10px;
 }
 .categoryItem:hover{
     background: var(--n);
-    color: var(--s);
+    color: var(--b);
 }
 
 .categoryItemLink{
@@ -245,7 +234,7 @@ div#stripes {
 }
 
 .wordCount{
-    color: var(--d);
+    color: var(--t);
     flex-grow: 1;
     flex-basis: 0;
     text-align: right;
