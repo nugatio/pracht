@@ -130,8 +130,8 @@ a{
 
 .articleHead{
     margin-bottom: 15px;
-    margin-top: 20px;
-    padding-bottom: 5px;
+    margin-top: 17.5px;
+    padding-bottom: 4px;
     border-bottom: 1.5px solid var(--s);
 }
 
@@ -185,7 +185,7 @@ div#stripes {
     line-height: 80%;
     display: flex;
     gap: 7px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .categoryItem{
