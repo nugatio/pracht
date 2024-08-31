@@ -11,7 +11,7 @@ const fragmentShader = `
     uniform float time;
     uniform vec2 resolution;
 
-    const vec3 COLOR1 = vec3(0.5, 0.7, 0.6);
+    const vec3 COLOR1 = vec3(0.3, 0.6, 0.5);
     const vec3 COLOR2 = vec3(0.75, 0.3, 0.6);
     const vec3 COLOR3 = vec3(0.8, 0.45, 0.7);
 
