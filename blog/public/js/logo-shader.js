@@ -38,12 +38,12 @@ const fragmentShader = `
 
         float n = 0.0;
         for (float i = 1.0; i < 3.0; i++) {
-            float scale = pow(1.0, i);
-            n += noise(vec2(uv.x * scale - time * 0.08 * i, uv.y * scale * 0.4)) / scale;
+            float scale = pow(1.3, i);
+            n += noise(vec2(uv.x * scale - time * 0.15 * i, uv.y * scale * 0.6)) / scale;
         }
 
         float wave = sin(uv.x * 2.0 + time * 0.1 + n * 2.0);
-        float pattern = smoothstep(0.3, 0.7, n * 0.7 + wave * 0.2);
+        float pattern = smoothstep(0.3, 0.7, n * 0.8 + wave * 0.2);
 
         vec3 col = mix(COLOR1, COLOR2, pattern);
         col = mix(col, COLOR3, pow(1.0 - pattern, 8.0));
@@ -68,6 +68,9 @@ const material = new THREE.ShaderMaterial({
 
 scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
 
+// Generate a random time offset
+const randomOffset = Math.random() * 1000;
+
 function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
     const width = canvas.clientWidth;
@@ -80,7 +83,7 @@ function resizeRendererToDisplaySize(renderer) {
 }
 
 function animate(time) {
-    time *= 0.001; // convert to seconds
+    time = time * 0.001 + randomOffset; // Convert to seconds and add random offset
     if (resizeRendererToDisplaySize(renderer)) {
         material.uniforms.resolution.value.set(renderer.domElement.width, renderer.domElement.height);
     }
