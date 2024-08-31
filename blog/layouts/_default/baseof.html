@@ -12,16 +12,8 @@
 <body>
     <div class="container">
         {{ partial "navbar" . }}
-        <a href="/">
-            <div class="logo">
-                <canvas id="logoCanvas"></canvas>
-                <div class="logoText">PRACHT</div>
-            </div>
-        </a>
         {{ block "main" . }} {{ end }}
         {{ partial "footer" . }}
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="/js/logo-shader.js"></script>
 </body>
 </html>
