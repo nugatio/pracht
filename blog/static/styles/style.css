@@ -128,12 +128,33 @@ a{
     color: var(--n);
 }
 
-.articleHead{
+.articleHead {
+    position: relative;
     margin-bottom: 15px;
     margin-top: 15px;
     padding-bottom: 3.7px;
-    border-bottom: 1.5px solid var(--s);
-}
+  }
+  
+  .articleHead::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    background: linear-gradient(to right, var(--s), var(--d), var(--s));
+    background-size: 200% 100%;
+    animation: shimmer 5s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: -100% 0;
+    }
+  }
 
 .articleHeadList:not(:last-child){
     margin-bottom: 15px;
