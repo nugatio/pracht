@@ -11,9 +11,9 @@ const fragmentShader = `
     uniform float time;
     uniform vec2 resolution;
 
-    const vec3 COLOR1 = vec3(0.3, 0.6, 0.6);
+    const vec3 COLOR1 = vec3(0.5, 0.7, 0.6);
     const vec3 COLOR2 = vec3(0.75, 0.3, 0.6);
-    const vec3 COLOR3 = vec3(0.95, 0.5, 0.8);
+    const vec3 COLOR3 = vec3(0.8, 0.45, 0.7);
 
     float hash(vec2 p) {
         return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
@@ -38,15 +38,15 @@ const fragmentShader = `
 
         float n = 0.0;
         for (float i = 1.0; i < 3.0; i++) {
-            float scale = pow(1.3, i);
-            n += noise(vec2(uv.x * scale - time * 0.15 * i, uv.y * scale * 0.6)) / scale;
+            float scale = pow(1.25, i);
+            n += noise(vec2(uv.x * scale - time * 0.2 * i, uv.y * scale * 0.7)) / scale;
         }
 
-        float wave = sin(uv.x * 2.0 + time * 0.1 + n * 2.0);
-        float pattern = smoothstep(0.3, 0.7, n * 0.8 + wave * 0.2);
+        float wave = sin(uv.x * 1.0 + time * 0.15 + n * 1.0);
+        float pattern = smoothstep(0.3, 0.7, n * 0.8 + wave * 0.15);
 
         vec3 col = mix(COLOR1, COLOR2, pattern);
-        col = mix(col, COLOR3, pow(1.0 - pattern, 8.0));
+        col = mix(col, COLOR3, pow(1.0 - pattern, 10.0));
 
         gl_FragColor = vec4(col, 1.0);
     }
