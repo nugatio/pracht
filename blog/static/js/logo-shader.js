@@ -26,7 +26,7 @@ const fragmentShader = `
     float noise(vec2 p) {
         vec2 i = floor(p);
         vec2 f = fract(p);
-        f = f * f * (3.0 - 2.0 * f);
+
         return mix(
             mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
             mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x),
@@ -43,20 +43,20 @@ const fragmentShader = `
         // Create multiple layers of noise
         for (float i = 1.0; i < 4.0; i++) {
             float scale = pow(1.2, i);
-            n += noise(vec2(uv.x * scale - time * 0.05 * i, uv.y * scale * 0.35)) / scale;
+            n += noise(vec2(uv.x * scale - time * 0.1 * i, uv.y * scale * 0.4)) / scale;
         }
         
         // Create horizontal wave effect
-        float wave = sin(uv.x * 2.0 + time * 0.25 + n * 5.0);
+        float wave = sin(uv.x * 2.0 + time * 0.1 + n * 8.0);
         
         // Combine noise and wave
-        float pattern = smoothstep(0.3, 0.7, n * 0.8 + wave * 0.4);
+        float pattern = smoothstep(0.3, 0.7, n * 0.9 + wave * 0.4);
         
         // Use pattern to mix between colors
         vec3 col = mix(COLOR1, COLOR2, pattern);
         
         // Add highlights
-        col = mix(col, COLOR3, pow(1.0 - pattern, 10.0));
+        col = mix(col, COLOR3, pow(1.0 - pattern, 5.0));
         
         // Add a subtle pulsing effect
         // col *= 0.9 + 0.1 * sin(time * 2.0 + uv.x * 10.0);
