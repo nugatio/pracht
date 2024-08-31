@@ -19,9 +19,7 @@ const fragmentShader = `
     const vec3 COLOR3 = vec3(0.95, 0.5, 0.8);
 
     float hash(vec2 p) {
-        p = fract(p * vec2(123.34, 456.21));
-        p += dot(p, p + 45.32);
-        return fract(p.x * p.y);
+        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
     }
 
     float noise(vec2 p) {
@@ -37,7 +35,7 @@ const fragmentShader = `
 
     void main() {
         vec2 uv = gl_FragCoord.xy / resolution.xy;
-        
+
         // Handle aspect ratio more accurately
         uv = uv * 2.0 - 1.0;
         uv.x *= resolution.x / resolution.y;
@@ -45,23 +43,23 @@ const fragmentShader = `
 
         float n = 0.0;
 
-        // Create multiple layers of noise
-        for (float i = 1.0; i < 4.0; i++) {
-            float scale = pow(1.2, i);
-            n += noise(vec2(uv.x * scale - time * 0.1 * i, uv.y * scale * 0.4)) / scale;
+        // Reduce layers of noise to lower complexity
+        for (float i = 1.0; i < 3.0; i++) {
+            float scale = pow(1.3, i);  // Slightly increased scale factor
+            n += noise(vec2(uv.x * scale - time * 0.08 * i, uv.y * scale * 0.3)) / scale;
         }
 
-        // Create horizontal wave effect
-        float wave = sin(uv.x * 2.0 + time * 0.05 + n * 8.0);
+        // Refine horizontal wave effect for stability
+        float wave = sin(uv.x * 3.0 + time * 0.04 + n * 5.0);
 
         // Combine noise and wave
-        float pattern = smoothstep(0.3, 0.7, n * 0.9 + wave * 0.4);
+        float pattern = smoothstep(0.4, 0.6, n * 0.8 + wave * 0.3);
 
         // Use pattern to mix between colors
         vec3 col = mix(COLOR1, COLOR2, pattern);
 
         // Add highlights
-        col = mix(col, COLOR3, pow(1.0 - pattern, 5.0));
+        col = mix(col, COLOR3, pow(1.0 - pattern, 4.0));
 
         gl_FragColor = vec4(col, 1.0);
     }
