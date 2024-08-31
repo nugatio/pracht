@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/styles/style.css">
     <title>Tags</title>
     <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -23,7 +24,12 @@
     </div>
     
 </nav>
-        <a href="/"><div class="logo">PRACHT</div></a>
+        <a href="/">
+            <div class="logo">
+                <canvas id="logoCanvas"></canvas>
+                <div class="logoText">PRACHT</div>
+            </div>
+        </a>
         
 <div class="articleList">
      
@@ -38,6 +44,6 @@
     </div>
 </div>
     </div>
-    
+    <script src="/js/logo-shader.js"></script>
 </body>
 </html>

@@ -278,3 +278,36 @@ div#stripes {
 .articleImage{
     width: 100%;
 }
+
+.logo {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    background: none; /* Remove any existing background */
+}
+
+#logoCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.logoText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "Righteous", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 35px;
+    font-optical-sizing: auto;
+    text-align: center;
+    line-height: 110%;
+    color: var(--b);
+    z-index: 1;
+}
