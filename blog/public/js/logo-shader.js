@@ -26,7 +26,7 @@ const fragmentShader = `
     float noise(vec2 p) {
         vec2 i = floor(p);
         vec2 f = fract(p);
-
+        f = f * f * (3.0 - 2.0 * f);
         return mix(
             mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
             mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x),
@@ -59,7 +59,7 @@ const fragmentShader = `
         col = mix(col, COLOR3, pow(1.0 - pattern, 5.0));
         
         // Add a subtle pulsing effect
-        // col *= 0.9 + 0.1 * sin(time * 2.0 + uv.x * 10.0);
+        // col *= 0.9 + 0.1 * sin(time * 2.0 + uv.x * 1000.0);
         
         gl_FragColor = vec4(col, 1.0);
     }
@@ -85,8 +85,8 @@ scene.add(mesh);
 
 function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
+    const width = canvas.clientWidth * window.devicePixelRatio;
+    const height = canvas.clientHeight * window.devicePixelRatio;
     const needResize = canvas.width !== width || canvas.height !== height;
     if (needResize) {
         renderer.setSize(width, height, false);
