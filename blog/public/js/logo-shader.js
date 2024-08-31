@@ -42,15 +42,15 @@ const fragmentShader = `
         
         // Create multiple layers of noise
         for (float i = 1.0; i < 4.0; i++) {
-            float scale = pow(2.0, i);
-            n += noise(vec2(uv.x * scale - time * 0.1 * i, uv.y * scale * 0.2)) / scale;
+            float scale = pow(1.25, i);
+            n += noise(vec2(uv.x * scale - time * 0.05 * i, uv.y * scale * 0.4)) / scale;
         }
         
         // Create horizontal wave effect
-        float wave = sin(uv.x * 5.0 + time * 0.5 + n * 2.0) * 0.5 + 0.5;
+        float wave = sin(uv.x * 10.0 + time * 0.5 + n * 12.0);
         
         // Combine noise and wave
-        float pattern = smoothstep(0.4, 0.6, n * 0.7 + wave * 0.3);
+        float pattern = smoothstep(0.4, 0.7, n * 0.7 + wave * 0.4);
         
         // Use pattern to mix between colors
         vec3 col = mix(COLOR1, COLOR2, pattern);
@@ -59,7 +59,7 @@ const fragmentShader = `
         col = mix(col, COLOR3, pow(1.0 - pattern, 8.0) * 0.5);
         
         // Add a subtle pulsing effect
-        col *= 0.9 + 0.1 * sin(time * 2.0 + uv.x * 10.0);
+        col *= 0.9 + 0.1 * sin(time * 2.0 + uv.x * 1000.0);
         
         gl_FragColor = vec4(col, 1.0);
     }
