@@ -42,15 +42,15 @@ const fragmentShader = `
         
         // Create multiple layers of noise
         for (float i = 1.0; i < 4.0; i++) {
-            float scale = pow(1.25, i);
-            n += noise(vec2(uv.x * scale - time * 0.05 * i, uv.y * scale * 0.4)) / scale;
+            float scale = pow(1.2, i);
+            n += noise(vec2(uv.x * scale - time * 0.05 * i, uv.y * scale * 0.35)) / scale;
         }
         
         // Create horizontal wave effect
-        float wave = sin(uv.x * 2.0 + time * 0.5 + n * 8.0);
+        float wave = sin(uv.x * 2.0 + time * 0.25 + n * 5.0);
         
         // Combine noise and wave
-        float pattern = smoothstep(0.3, 0.7, n * 0.7 + wave * 0.3);
+        float pattern = smoothstep(0.3, 0.7, n * 0.8 + wave * 0.4);
         
         // Use pattern to mix between colors
         vec3 col = mix(COLOR1, COLOR2, pattern);
