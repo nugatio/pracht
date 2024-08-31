@@ -38,15 +38,15 @@ const fragmentShader = `
 
         float n = 0.0;
         for (float i = 1.0; i < 3.0; i++) {
-            float scale = pow(1.1, i);
-            n += noise(vec2(uv.x * scale - time * 0.08 * i, uv.y * scale * 0.3)) / scale;
+            float scale = pow(1.0, i);
+            n += noise(vec2(uv.x * scale - time * 0.08 * i, uv.y * scale * 0.4)) / scale;
         }
 
-        float wave = sin(uv.x * 3.0 + time * 0.04 + n * 5.0);
-        float pattern = smoothstep(0.4, 0.6, n * 0.8 + wave * 0.3);
+        float wave = sin(uv.x * 2.0 + time * 0.1 + n * 2.0);
+        float pattern = smoothstep(0.3, 0.7, n * 0.7 + wave * 0.2);
 
         vec3 col = mix(COLOR1, COLOR2, pattern);
-        col = mix(col, COLOR3, pow(1.0 - pattern, 4.0));
+        col = mix(col, COLOR3, pow(1.0 - pattern, 8.0));
 
         gl_FragColor = vec4(col, 1.0);
     }
