@@ -2,10 +2,9 @@
 title = '{{ replace .File.ContentBaseName "-" " " | title }}'
 subtitle = ''
 date = {{ .Date }}
-draft = false
 slug = ''
+draft = false
 number = '1'
 edition = 'die meinung'
-image = ''
-alt = ''
+categories = []
 +++

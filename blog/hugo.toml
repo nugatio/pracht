@@ -5,4 +5,4 @@ paginate = 10
 
 [params]
   dateFormat = "02.01.2006"
-  description = "die Meinung, ein Blog über alles."
+  description = "die meinung, ein Blog über alles."
