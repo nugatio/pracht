@@ -19,14 +19,12 @@ const fragmentShader = `
   const vec3 COLOR2 = vec3(0.75, 0.3, 0.6);
   const vec3 COLOR3 = vec3(0.8, 0.45, 0.7);
 
-  // Improved hash function
+  // Original hash function
   float hash(vec2 p) {
-    p = fract(p * vec2(123.34, 456.21));
-    p += dot(p, p + 45.32);
-    return fract(p.x * p.y);
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
   }
 
-  // Improved noise function
+  // Original noise function
   float noise(vec2 p) {
     vec2 i = floor(p);
     vec2 f = fract(p);
@@ -44,9 +42,9 @@ const fragmentShader = `
     uv.x *= aspect;
 
     float n = 0.0;
-    for (float i = 0.0; i < 3.0; i++) {
+    for (float i = 1.0; i < 3.0; i++) {
       float scale = pow(1.25, i);
-      n += noise(vec2(uv.x * scale - time * 0.2 * (i + 1.0), uv.y * scale * 0.7)) / scale;
+      n += noise(vec2(uv.x * scale - time * 0.2 * i, uv.y * scale * 0.7)) / scale;
     }
 
     float wave = sin(uv.x * 1.0 + time * 0.15 + n * 1.0);
