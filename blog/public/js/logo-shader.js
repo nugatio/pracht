@@ -7,17 +7,17 @@ const vertexShader = `
 `;
 
 const fragmentShader = `
+    #ifdef GL_ES
     precision highp float;
+    #endif
     uniform float time;
     uniform vec2 resolution;
     const vec3 COLOR1 = vec3(0.3, 0.6, 0.5);
     const vec3 COLOR2 = vec3(0.75, 0.3, 0.6);
     const vec3 COLOR3 = vec3(0.8, 0.45, 0.7);
-
     float hash(vec2 p) {
         return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
     }
-
     float noise(vec2 p) {
         vec2 i = floor(p);
         vec2 f = fract(p);
@@ -28,90 +28,68 @@ const fragmentShader = `
             f.y
         );
     }
-
     void main() {
         vec2 uv = gl_FragCoord.xy / resolution.xy;
         uv = uv * 2.0 - 1.0;
         uv.x *= resolution.x / resolution.y;
         uv = uv * 0.5 + 0.5;
-
-        float n = noise(vec2(uv.x * 1.25 - time * 0.2, uv.y * 0.875)) +
-                  noise(vec2(uv.x * 1.5625 - time * 0.25, uv.y * 1.09375)) * 0.8;
-
+        float n = 0.0;
+        for (float i = 1.0; i < 3.0; i++) {
+            float scale = pow(1.25, i);
+            n += noise(vec2(uv.x * scale - time * 0.2 * i, uv.y * scale * 0.7)) / scale;
+        }
         float wave = sin(uv.x * 1.0 + time * 0.15 + n * 1.0);
         float pattern = smoothstep(0.3, 0.7, n * 0.8 + wave * 0.15);
-
         vec3 col = mix(COLOR1, COLOR2, pattern);
         col = mix(col, COLOR3, pow(1.0 - pattern, 10.0));
-
         gl_FragColor = vec4(col, 1.0);
     }
 `;
 
 function initShader() {
-    const canvas = document.getElementById('logoCanvas');
-    if (!canvas) {
-        console.error('Canvas element not found');
-        return;
+  const canvas = document.getElementById('logoCanvas');
+  if (!canvas) {
+    return;
+  }
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+  const scene = new THREE.Scene();
+  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  const material = new THREE.ShaderMaterial({
+    vertexShader,
+    fragmentShader,
+    uniforms: {
+      time: { value: 0 },
+      resolution: { value: new THREE.Vector2() }
     }
-
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-
-    const material = new THREE.ShaderMaterial({
-        vertexShader,
-        fragmentShader,
-        uniforms: {
-            time: { value: 0 },
-            resolution: { value: new THREE.Vector2() }
-        }
-    });
-
-    scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
-
-    const randomOffset = Math.random() * 1000;
-
-    function resizeRendererToDisplaySize(renderer) {
-        const canvas = renderer.domElement;
-        const width = canvas.clientWidth;
-        const height = canvas.clientHeight;
-        const needResize = canvas.width !== width || canvas.height !== height;
-        if (needResize) {
-            renderer.setSize(width, height, false);
-          }
-          return needResize;
-      }
-  
-      let animationFrameId;
-      function animate(time) {
-          time = time * 0.001 + randomOffset;
-          if (resizeRendererToDisplaySize(renderer)) {
-              const canvas = renderer.domElement;
-              material.uniforms.resolution.value.set(canvas.width, canvas.height);
-              camera.aspect = canvas.clientWidth / canvas.clientHeight;
-              camera.updateProjectionMatrix();
-          }
-          material.uniforms.time.value = time;
-          renderer.render(scene, camera);
-          animationFrameId = requestAnimationFrame(animate);
-      }
-  
-      animate(0);
-  
-      // Clean up function
-      return () => {
-          if (animationFrameId) {
-              cancelAnimationFrame(animationFrameId);
-          }
-          renderer.dispose();
-          material.dispose();
-      };
+  });
+  scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
+  const randomOffset = Math.random() * 1000;
+  function resizeRendererToDisplaySize(renderer) {
+    const canvas = renderer.domElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    const needResize = canvas.width !== width || canvas.height !== height;
+    if (needResize) {
+      renderer.setSize(width, height, false);
+    }
+    return needResize;
   }
-  
-  // Initialize the shader when the DOM is fully loaded
-  if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initShader);
-  } else {
-      initShader();
+  function animate(time) {
+    time = time * 0.001 + randomOffset;
+    if (resizeRendererToDisplaySize(renderer)) {
+      const canvas = renderer.domElement;
+      material.uniforms.resolution.value.set(canvas.width, canvas.height);
+      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      camera.updateProjectionMatrix();
+    }
+    material.uniforms.time.value = time;
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
   }
+  requestAnimationFrame(animate);
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initShader);
+} else {
+  initShader();
+}
