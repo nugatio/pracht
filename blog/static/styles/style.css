@@ -116,9 +116,9 @@ a{
 
 .articleHead {
     position: relative;
-    margin-bottom: 20px;
-    margin-top: 17.5px;
-    padding-bottom: 2.5px;
+    margin-bottom: 17.5px;
+    margin-top: 20px;
+    padding-bottom: 2px;
     border-bottom: 1px solid var(--s);
 }
 
@@ -182,8 +182,19 @@ a{
     font-size: 15px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 2.5px;
+    margin-bottom: 25px;
     margin-top: 2.5px;
+}
+
+.informationBarBottom{
+    font-family: "Public Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    word-spacing: 2px;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .articleNumber{
@@ -207,7 +218,7 @@ a{
     line-height: 100%;
     display: flex;
     gap: 10px;
-    margin-bottom: 30px;
+    margin-top: 2.5px;
 }
 
 .categoryItem{

@@ -14,13 +14,6 @@
                 {{ .Content | countwords }} Wörter
             </div>
         </div>
-        <div class="categoryList">
-            {{ range (.GetTerms "categories") }}
-                <div class="categoryItem">
-                    [<a class="categoryItemLink" href={{ .Permalink }}>{{ .Name }}</a>]
-                </div>
-            {{ end }}
-        </div>
         <div class="articleImageBox">
             <img class="articleImage" src="/images/{{.Params.slug}}.webp" loading="lazy" alt="">
         </div>
@@ -39,12 +32,19 @@
             </div>
         </div>
         <div class="articleContent">{{.Content}}</div>
-        <div class="informationBar">
+        <div class="informationBarBottom">
             <time class="time">{{ dateFormat .Site.Params.dateFormat .Date }}</time>
             <div class="id">
                 #{{ .Slug }}
             </div>
             <h3 class="author">— NB</h3>
+        </div>
+        <div class="categoryList">
+            {{ range (.GetTerms "categories") }}
+                <div class="categoryItem">
+                    [<a class="categoryItemLink" href={{ .Permalink }}>{{ .Name }}</a>]
+                </div>
+            {{ end }}
         </div>
     </div>
 </div>
