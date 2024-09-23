@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Energie on pracht</title>
-    <link>http://localhost:1313/categories/energie/</link>
+    <link>http://localhost:62424/categories/energie/</link>
     <description>Recent content in Energie on pracht</description>
     <generator>Hugo</generator>
     <language>de-de</language>
     <lastBuildDate>Mon, 22 Jul 2024 10:00:00 +0200</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/energie/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:62424/categories/energie/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kraftwerk der Lügen</title>
-      <link>http://localhost:1313/fe23f8adc4/</link>
+      <link>http://localhost:62424/fe23f8adc4/</link>
       <pubDate>Mon, 22 Jul 2024 10:00:00 +0200</pubDate>
-      <guid>http://localhost:1313/fe23f8adc4/</guid>
-      <description>In den Tiefen des deutschen Energielabyrinths schlummert ein Geheimnis, das die Nation in Atem hält: Die nukleare Sphinx, deren Rätsel ungelöst bleibt. Während Frankreich seine Reaktoren mit stolzgeschwellter Brust präsentiert, wälzt sich Deutschland in einem Meer aus Kohlestaub und zerplatzten Windkraftträumen.&#xA;Die atomare Renaissance klopft an Europas Tür, doch hierzulande bleibt sie ungehört. In den Korridoren der Macht flüstert man von einer &amp;ldquo;grünen Verschwörung&amp;rdquo;, die das Land in die energetische Steinzeit katapultiert hat.</description>
+      <guid>http://localhost:62424/fe23f8adc4/</guid>
+      <description>&lt;p&gt;In den Tiefen des deutschen Energielabyrinths schlummert ein Geheimnis, das die Nation in Atem hält: Die nukleare Sphinx, deren Rätsel ungelöst bleibt. Während Frankreich seine Reaktoren mit stolzgeschwellter Brust präsentiert, wälzt sich Deutschland in einem Meer aus Kohlestaub und zerplatzten Windkraftträumen.&lt;/p&gt;&#xA;&lt;p&gt;Die atomare Renaissance klopft an Europas Tür, doch hierzulande bleibt sie ungehört. In den Korridoren der Macht flüstert man von einer &lt;strong&gt;&amp;ldquo;grünen Verschwörung&amp;rdquo;&lt;/strong&gt;, die das Land in die energetische Steinzeit katapultiert hat. Doch wer sind die wahren Drahtzieher dieses nuklearen Exodus?&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

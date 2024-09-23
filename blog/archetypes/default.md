@@ -1,10 +1,10 @@
 +++
-title = '{{ replace .File.ContentBaseName "-" " " | title }}'
+title = ''
 subtitle = ''
 date = {{ .Date }}
-slug = ''
+slug = '{{ .File.ContentBaseName }}'
 draft = false
-number = '1'
+number = '{{ len (where .Site.RegularPages "Section" "==" .Section) | add 1 }}'
 edition = 'die meinung'
 categories = []
 +++
