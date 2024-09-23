@@ -2,66 +2,66 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on pracht</title>
-    <link>http://localhost:51842/categories/</link>
+    <link>http://localhost:53196/categories/</link>
     <description>Recent content in Categories on pracht</description>
     <generator>Hugo</generator>
     <language>de-de</language>
     <lastBuildDate>Mon, 23 Sep 2024 16:00:00 +0200</lastBuildDate>
-    <atom:link href="http://localhost:51842/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:53196/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bildung</title>
-      <link>http://localhost:51842/categories/bildung/</link>
+      <link>http://localhost:53196/categories/bildung/</link>
       <pubDate>Mon, 23 Sep 2024 16:00:00 +0200</pubDate>
-      <guid>http://localhost:51842/categories/bildung/</guid>
+      <guid>http://localhost:53196/categories/bildung/</guid>
       <description></description>
     </item>
     <item>
       <title>Wissenschaft</title>
-      <link>http://localhost:51842/categories/wissenschaft/</link>
+      <link>http://localhost:53196/categories/wissenschaft/</link>
       <pubDate>Mon, 23 Sep 2024 16:00:00 +0200</pubDate>
-      <guid>http://localhost:51842/categories/wissenschaft/</guid>
+      <guid>http://localhost:53196/categories/wissenschaft/</guid>
       <description></description>
     </item>
     <item>
       <title>Gesellschaft</title>
-      <link>http://localhost:51842/categories/gesellschaft/</link>
+      <link>http://localhost:53196/categories/gesellschaft/</link>
       <pubDate>Thu, 29 Aug 2024 19:00:00 +0200</pubDate>
-      <guid>http://localhost:51842/categories/gesellschaft/</guid>
+      <guid>http://localhost:53196/categories/gesellschaft/</guid>
       <description></description>
     </item>
     <item>
       <title>Politik</title>
-      <link>http://localhost:51842/categories/politik/</link>
+      <link>http://localhost:53196/categories/politik/</link>
       <pubDate>Thu, 29 Aug 2024 19:00:00 +0200</pubDate>
-      <guid>http://localhost:51842/categories/politik/</guid>
+      <guid>http://localhost:53196/categories/politik/</guid>
       <description></description>
     </item>
     <item>
       <title>Künstliche Intelligenz</title>
-      <link>http://localhost:51842/categories/k%C3%BCnstliche-intelligenz/</link>
+      <link>http://localhost:53196/categories/k%C3%BCnstliche-intelligenz/</link>
       <pubDate>Wed, 31 Jul 2024 19:00:00 +0200</pubDate>
-      <guid>http://localhost:51842/categories/k%C3%BCnstliche-intelligenz/</guid>
+      <guid>http://localhost:53196/categories/k%C3%BCnstliche-intelligenz/</guid>
       <description></description>
     </item>
     <item>
       <title>Tech</title>
-      <link>http://localhost:51842/categories/tech/</link>
+      <link>http://localhost:53196/categories/tech/</link>
       <pubDate>Wed, 31 Jul 2024 19:00:00 +0200</pubDate>
-      <guid>http://localhost:51842/categories/tech/</guid>
+      <guid>http://localhost:53196/categories/tech/</guid>
       <description></description>
     </item>
     <item>
       <title>Energie</title>
-      <link>http://localhost:51842/categories/energie/</link>
+      <link>http://localhost:53196/categories/energie/</link>
       <pubDate>Mon, 22 Jul 2024 10:00:00 +0200</pubDate>
-      <guid>http://localhost:51842/categories/energie/</guid>
+      <guid>http://localhost:53196/categories/energie/</guid>
       <description></description>
     </item>
     <item>
       <title>Medien</title>
-      <link>http://localhost:51842/categories/medien/</link>
+      <link>http://localhost:53196/categories/medien/</link>
       <pubDate>Wed, 17 Jul 2024 20:00:00 +0200</pubDate>
-      <guid>http://localhost:51842/categories/medien/</guid>
+      <guid>http://localhost:53196/categories/medien/</guid>
       <description></description>
     </item>
   </channel>
