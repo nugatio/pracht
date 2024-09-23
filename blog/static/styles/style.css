@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
 :root{
-    --b: #FEFCFA;
+    --b: #FEFEFA;
     --s: #DEDCDA;
     --t: #000000;
     --d: #777777;
@@ -27,9 +27,13 @@ body{
     background: var(--b);
     color: var(--t);
     font-family: "Fira Mono", monospace;
-    letter-spacing: -0.6px;
+    letter-spacing: -0.75px;
     word-spacing: -4px;
-    line-height: 117%;
+    line-height: 115%;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body.dark{
@@ -56,8 +60,8 @@ p{
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 15px;
-    letter-spacing: -0.75px;
-    word-spacing: -2.25px;
+    letter-spacing: -1px;
+    word-spacing: -3px;
     line-height: 125%;
 }
 
@@ -86,26 +90,8 @@ a{
 }
 
 .navbar{
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     display: block;
-}
-
-.logo{
-    overflow: hidden;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    font-family: "Righteous", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 35px;
-    font-optical-sizing: auto;
-    text-align: center;
-    background: var(--n);
-    line-height: 110%;
-    color: var(--b);
 }
 
 .navbarBox{
@@ -120,7 +106,7 @@ a{
     padding: 2px;
     background: var(--s);
     gap: 10px;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 .linkText{
@@ -130,17 +116,17 @@ a{
 
 .articleHead {
     position: relative;
-    margin-bottom: 15px;
-    margin-top: 15px;
-    padding-bottom: 3.7px;
-    border-bottom: 1.5px solid var(--s);
+    margin-bottom: 20px;
+    margin-top: 17.5px;
+    padding-bottom: 2.5px;
+    border-bottom: 1px solid var(--s);
 }
 
 .articleHeadList:not(:last-child){
     margin-bottom: 15px;
     margin-top: 15px;
     padding-bottom: 15px;
-    border-bottom: 1.5px solid var(--s);
+    border-bottom: 1px solid var(--s);
 }
 
 .articleLink{
@@ -157,7 +143,7 @@ a{
   }
   
   div#stripes {
-    height: 10px;
+    height: 8px;
     background-image: linear-gradient(135deg, var(--s) 25%, transparent 25%, transparent 50%, var(--s) 50%, var(--s) 75%, transparent 75%, #fff);
     background-size: 25px 25px;
     animation: moveStripes 4s linear infinite;
@@ -169,11 +155,12 @@ a{
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-    word-spacing: 1.5px;
+    word-spacing: 2px;
     font-size: 15px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 2px;
+    margin-bottom: 2.5px;
+    margin-top: 2.5px;
 }
 
 .articleNumber{
@@ -192,12 +179,12 @@ a{
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-    word-spacing: 1.5px;
+    word-spacing: 2px;
     font-size: 15px;
-    line-height: 80%;
+    line-height: 100%;
     display: flex;
-    gap: 7px;
-    margin-bottom: 20px;
+    gap: 10px;
+    margin-bottom: 30px;
 }
 
 .categoryItem{
@@ -220,7 +207,7 @@ a{
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-    word-spacing: 1.5px;
+    word-spacing: 2px;
     font-size: 15px;
     display: flex;
     gap: 10px;
@@ -260,6 +247,7 @@ a{
     display: inline-block;
     white-space: wrap;
     text-align: justify;
+    font-size: 16px;
 }
 
 .author{
@@ -269,7 +257,7 @@ a{
     font-style: normal;
     font-size: 15px;
     word-spacing: 0px;
-    letter-spacing: -1.5px;
+    letter-spacing: -1px;
     color: var(--d);
     flex-grow: 1;
     flex-basis: 0;
@@ -284,7 +272,7 @@ a{
 
 .id{
     margin-top: auto;
-    font-size: 10px;
+    font-size: 11px;
 }
 
 .articleImage{
