@@ -122,12 +122,35 @@ a{
     border-bottom: 1px solid var(--s);
 }
 
-.articleHeadList:not(:last-child){
-    margin-bottom: 15px;
+.articleHeadList {
     margin-top: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid var(--s);
 }
+
+.articleHeadList {
+    margin-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--s);
+}
+
+.articleHeadList {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--s);
+}
+
+.articleHeadList.last-item {
+    border-bottom: none;
+    margin-bottom: 15;
+    padding-bottom: 0;
+}
+
+.pagination {
+    margin-top: 25px;
+}
+
 
 .articleLink{
     color: var(--t);
@@ -208,13 +231,14 @@ a{
     font-weight: 400;
     font-style: normal;
     word-spacing: 2px;
-    font-size: 15px;
+    font-size: 16px;
     display: flex;
     gap: 10px;
     list-style: none;
     padding: 0;
     margin: 0;
     justify-content: center;
+    margin-top: 25px;
 }
 
 .page-link{

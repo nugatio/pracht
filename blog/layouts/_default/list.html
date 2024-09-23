@@ -1,22 +1,28 @@
 {{ define "main" }}
 <div class="articleList">
-    {{ range .Paginator.Pages }}
-        <div class="articleHeadList">
-            <a href={{.Permalink}} class="articleLink">
-                <div class="articleHeadContainer">
-                    <div class="articleTitleBox">
-                        <h2 class="articleTitle">
-                            {{ .Title }}
-                        </h2>
-                    </div>
-                    <div class="articleSubtitleBox">
-                        <h3 class="articleSubtitle">
-                            {{ .Params.Subtitle }}
-                        </h3>
-                    </div>
+    {{ $paginator := .Paginator }}
+    {{ $lastIndex := sub (len $paginator.Pages) 1 }}
+    {{ range $index, $page := $paginator.Pages }}
+    <div class="articleHeadList{{ if eq $index $lastIndex }} last-item{{ end }}">
+        <a href="{{ $page.Permalink }}" class="articleLink">
+            <div class="articleHeadContainer">
+                <div class="articleTitleBox">
+                    <h2 class="articleTitle">
+                        {{ $page.Title }}
+                    </h2>
                 </div>
-            </a>
-        </div>
-    {{ end }} {{ template "_internal/pagination.html" . }}
+                <div class="articleSubtitleBox">
+                    <h3 class="articleSubtitle">
+                        {{ $page.Params.Subtitle }}
+                    </h3>
+                </div>
+            </div>
+        </a>
+    </div>
+    {{ end }}
+
+    {{ if gt .Paginator.TotalPages 1 }}
+        {{ template "_internal/pagination.html" . }}
+    {{ end }}
 </div>
 {{ end }}
