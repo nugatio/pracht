@@ -1,7 +1,7 @@
 baseURL = 'https://pracht.report/'
 languageCode = 'de-de'
 title = 'pracht'
-paginate = 3
+paginate = 10
 
 [params]
   dateFormat = "02.01.2006"
