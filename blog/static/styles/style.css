@@ -47,7 +47,7 @@ body.dark {
 h2 {
     font-weight: 700;
     font-size: 20px;
-    margin-bottom: 3.5px;
+    margin-bottom: 2.5px;
 }
 
 h3 {
@@ -59,7 +59,7 @@ h3 {
 p {
     font-size: 16px;
     font-weight: 400;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     letter-spacing: -1px;
     word-spacing: -3px;
     line-height: 125%;
@@ -90,7 +90,7 @@ a {
 }
 
 .navbar {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     display: block;
 }
 
@@ -106,7 +106,7 @@ a {
     padding: 2px;
     background: var(--s);
     gap: 10px;
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 .linkText {
@@ -116,21 +116,9 @@ a {
 
 .articleHead {
     position: relative;
-    margin-bottom: 17.5px;
+    margin-bottom: 15px;
     margin-top: 20px;
     padding-bottom: 2px;
-    border-bottom: 1px solid var(--s);
-}
-
-.articleHeadList {
-    margin-top: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid var(--s);
-}
-
-.articleHeadList {
-    margin-top: 15px;
-    padding-bottom: 15px;
     border-bottom: 1px solid var(--s);
 }
 
@@ -183,7 +171,7 @@ div#stripes {
     font-size: 15px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     margin-top: 2.5px;
 }
 
@@ -196,6 +184,8 @@ div#stripes {
     font-size: 15px;
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 2.5px;
 }
 
 .articleNumber {
@@ -251,7 +241,7 @@ div#stripes {
     padding: 0;
     margin: 0;
     justify-content: center;
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 .page-link {
