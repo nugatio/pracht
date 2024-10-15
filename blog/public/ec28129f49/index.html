@@ -16,20 +16,26 @@
 <body>
     <div class="container">
         <nav class="navbar">
-    <div class="navbarBox">
-        <div class="link">
-            <a href="/" class="linkText">[home]</a>
-        </div>
-        <div class="link">
-            <a href="/categories" class="linkText">[themen]</a>
-        </div>
+  <div class="navbarBox">
+    <div class="navLinks">
+      <div class="link">
+        <a href="/" class="linkText">[home]</a>
+      </div>
+      <div class="link">
+        <a href="/categories" class="linkText">[themen]</a>
+      </div>
     </div>
-    <a href="/">
-        <div class="logo">
-            <canvas id="logoCanvas"></canvas>
-            <div class="logoText">PRACHT</div>
-        </div>
-    </a>
+    <div class="dateDisplay">
+      <img src="/earth.gif" alt="Earth" class="earthIcon" data-nimg="1" style="mix-blend-mode: multiply">
+      <span id="currentDateTime"></span>
+    </div>
+  </div>
+  <a href="/">
+    <div class="logo">
+      <canvas id="logoCanvas"></canvas>
+      <div class="logoText">PRACHT</div>
+    </div>
+  </a>
 </nav>
         
 <div class="single">
@@ -112,5 +118,6 @@
     </div>
 </div>
     </div>
+    <script src="/js/t.js"></script>
 </body>
 </html>

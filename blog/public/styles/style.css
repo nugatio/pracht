@@ -96,9 +96,40 @@ a {
 
 .navbarBox {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
     gap: 10px;
     padding: 2px;
+    padding-right: 5px;
     background: var(--s);
+}
+
+.navLinks {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dateDisplay {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: Helvetica, sans-serif;
+    font-size: 11px;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    color: var(--t);
+}
+
+.earthIcon {
+    width: 14px;
+    height: 14px;
+}
+
+#currentDateTime{
+    padding-top: 2px;
 }
 
 .footer {
