@@ -1,8 +1,7 @@
-[site]
-  baseURL = "https://pracht.report/"
-  languageCode = "de-de"
-  title = "pracht"
-  paginate = 10
+title = "pracht"
+baseURL = "https://pracht.report/"
+languageCode = "de-de"
+paginate = 10
 
 [minify]
   disableCSS = false
