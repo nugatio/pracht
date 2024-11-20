@@ -217,7 +217,6 @@
         if ("fonts" in document) {
             Promise.all([
                 document.fonts.load("400 1em 'Fira Sans'"),
-                document.fonts.load("500 1em 'Fira Sans'"),
                 document.fonts.load("700 1em 'Fira Sans'"),
                 document.fonts.load("500 1em 'Fira Mono'")
             ]).then(() => {
