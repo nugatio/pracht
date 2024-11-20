@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 /* normalization */
 
@@ -58,9 +58,10 @@ img {
 
 body {
     background: var(--white);
-    font-family: "Fira Mono", monospace;
-    letter-spacing: -1px;
-    word-spacing: -3px;
+    font-family: "Fira Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
     line-height: 125%;
     color: var(--black);
 }
@@ -98,6 +99,8 @@ body {
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
+    font-family: "Fira Mono", monospace;
+    letter-spacing: -0.75px;
 }
 
 .nav-link,
@@ -108,7 +111,10 @@ body {
     color: var(--purple);
 }
 
-.navbar-date-wrapper {
+.navbar-date-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     font-size: 12px;
     font-family: Helvetica, sans-serif;
     letter-spacing: normal;
@@ -203,7 +209,7 @@ div#moving-stripes {
 }
 
 .information-bar-head {
-    padding-top: 12.5px;
+    padding-top: 5px;
     padding-bottom: 25px;
 }
 
