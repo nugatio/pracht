@@ -1,20 +1,21 @@
 {{ define "main" }}
-    <div class="article-list">
-        {{ $paginator := .Paginate .Pages }}
-        {{ range $index, $page := $paginator.Pages }}
-            <a href="{{ $page.Permalink }}" class="article-link">
-                <div class="article-list-item {{ if eq $index 0 }}first-item{{ end }} {{ if eq $index (sub (len $paginator.Pages) 1) }}last-item{{ end }}">
-                    <div class="article-banner-container">
-                        <div class="article-title-wrapper">
-                            <h2 class="article-title">{{ .Title }}</h2>
-                        </div>
-                        <div class="article-subtitle-wrapper">
-                            <h3 class="article-subtitle">{{ .Params.Subtitle }}</h3>
-                        </div>
-                    </div>
+<div class="article-list">
+    {{ $paginator := .Paginate .Pages }}
+    {{ range $index, $page := $paginator.Pages }}
+    <a href="{{ $page.Permalink }}" class="article-link">
+        <div
+            class="article-list-item {{ if eq $index 0 }}first-item{{ end }} {{ if eq $index (sub (len $paginator.Pages) 1) }}last-item{{ end }}">
+            <div class="article-banner-container">
+                <div class="article-title-wrapper">
+                    <h2 class="article-title">{{ .Title }}</h2>
                 </div>
-            </a>
-        {{ end }}
-        {{ template "_internal/pagination.html" . }}
-    </div>
+                <div class="article-subtitle-wrapper">
+                    <h3 class="article-subtitle">{{ .Params.Subtitle }}</h3>
+                </div>
+            </div>
+        </div>
+    </a>
+    {{ end }}
+    {{ template "_internal/pagination.html" . }}
+</div>
 {{ end }}
