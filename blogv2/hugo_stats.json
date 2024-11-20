@@ -13,10 +13,12 @@
       "link",
       "meta",
       "nav",
+      "noscript",
       "p",
       "path",
       "script",
       "strong",
+      "style",
       "svg",
       "time",
       "title"
