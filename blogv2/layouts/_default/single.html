@@ -1,8 +1,7 @@
 {{ define "main" }}
 <div class="article-container">
-    <div class="article-head-container">
-        <div id="moving-stripes">
-        </div>
+    <header class="article-head-container">
+        <div id="moving-stripes" aria-hidden="true"></div>
         <div class="article-information-container information-bar-head">
             <div class="article-number">
                 Beitrag {{ .Params.Number }}
@@ -22,12 +21,14 @@
                 <h3 class="article-subtitle">{{ .Params.Subtitle }}</h3>
             </div>
         </div>
-    </div>
+    </header>
     <div class="article-content">{{ .Content }}</div>
-    <div class="article-foot-container">
+    <footer class="article-foot-container">
         <div class="article-information-container information-bar-foot">
             <div class="article-date-wrapper">
-                <time class="article-date">{{ dateFormat .Site.Params.dateFormat .Date }}</time>
+                <time class="article-date">
+                    {{ dateFormat .Site.Params.dateFormat .Date }}
+                </time>
             </div>
             <div class="article-id">
                 #{{ .Slug }}
@@ -36,6 +37,6 @@
                 — NB
             </div>
         </div>
-    </div>
+    </footer>
 </div>
 {{ end }}

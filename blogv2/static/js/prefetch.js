@@ -1,9 +1,8 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const prefetchedUrls = new Set([window.location.pathname]);
-    
     const prefetchArticle = async (url) => {
         const normalizedUrl = url.endsWith('/') ? url : `${url}/`;
-        
+
         if (prefetchedUrls.has(normalizedUrl)) {
             return;
         }
@@ -24,17 +23,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const prefetchNavigationPages = () => {
         const paginationLinks = document.querySelectorAll('.pagination .page-item:not(.active) a');
-        const themenLink = document.querySelector('.nav-link[href="/themen"]');
-        
-        const navigationLinks = [...paginationLinks];
-        if (themenLink) navigationLinks.push(themenLink);
-        
+        const navLinks = [
+            ...document.querySelectorAll('.nav-link'),
+            document.querySelector('.navbar-logo-wrapper')
+        ].filter(Boolean);
+        const navigationLinks = [...paginationLinks, ...navLinks];
+
+        if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+            navigationLinks.push({ href: '/' });
+        }
+
         navigationLinks.forEach((link, index) => {
-            const pathname = new URL(link.href).pathname;
+            const pathname = link.href ? new URL(link.href).pathname : link;
             if (!prefetchedUrls.has(pathname)) {
                 if ('requestIdleCallback' in window) {
-                    requestIdleCallback(() => prefetchArticle(pathname), { 
-                        timeout: 1000 + (index * 500) 
+                    requestIdleCallback(() => prefetchArticle(pathname), {
+                        timeout: 1000 + (index * 500)
                     });
                 } else {
                     setTimeout(() => prefetchArticle(pathname), 1000 + (index * 500));
@@ -45,10 +49,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const addHoverListeners = () => {
         const articleLinks = document.querySelectorAll('.article-link');
-
-        const navLinks = [
+        const navElements = [
             ...document.querySelectorAll('.pagination .page-item:not(.active) a'),
-            document.querySelector('.nav-link[href="/themen"]')
+            ...document.querySelectorAll('.nav-link'),
+            document.querySelector('.navbar-logo-wrapper')
         ].filter(Boolean);
 
         articleLinks.forEach(link => {
@@ -60,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        navLinks.forEach(link => {
+        navElements.forEach(link => {
             link.addEventListener('mouseenter', () => {
                 const pathname = new URL(link.href).pathname;
                 if (!prefetchedUrls.has(pathname)) {
@@ -68,8 +72,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-    };
 
+        if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+            const logoWrapper = document.querySelector('.navbar-logo-wrapper');
+            if (logoWrapper && !prefetchedUrls.has('/')) {
+                prefetchArticle('/');
+            }
+        }
+    };
     setTimeout(prefetchNavigationPages, 1500);
     setTimeout(addHoverListeners, 100);
 });

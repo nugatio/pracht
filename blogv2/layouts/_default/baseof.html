@@ -2,17 +2,22 @@
 <html lang="de" class="no-js">
 
 <head>
+    <!-- metadata -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{or .Params.subtitle .Site.Params.description }}">
     <meta http-equiv="Content-Language" content="de">
     <meta name="color-scheme" content="light">
-    <title>{{ .Title }}</title>
 
+    <!-- preload critical resources -->
     <link rel="preload" href="/fonts/fira-sans-v17-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/fira-sans-v17-latin-700.woff2" as="font" type="font/woff2" crossorigin>
 
+    <title>{{ .Title }}</title>
+
+    <!-- critical css -->
     <style>
+        /* fonts */
         @font-face {
             font-family: 'Fira Mono';
             font-style: normal;
@@ -37,6 +42,7 @@
             font-display: swap;
         }
 
+        /* normalisation */
         *,
         *::before,
         *::after {
@@ -74,6 +80,7 @@
             height: auto;
         }
 
+        /* baseof */
         :root {
             --grey: #666666;
             --purple: #CC00AA;
@@ -103,6 +110,7 @@
             padding-bottom: 20px;
         }
 
+        /* navigation */
         .nav-container {
             background: var(--off-white);
             display: flex;
@@ -164,6 +172,7 @@
             filter: brightness(1.1);
         }
 
+        /* pagination */
         .pagination {
             font-weight: 400;
             word-spacing: 2px;
@@ -178,16 +187,17 @@
         .page-item {
             color: var(--grey);
         }
-        
+
         .page-item.active {
             color: var(--purple);
         }
-        
+
         .page-item.disabled {
             color: var(--off-white);
             cursor: not-allowed;
         }
 
+        /* article list */
         .article-list {
             display: flex;
             flex-direction: column;
@@ -233,12 +243,20 @@
             font-weight: 400;
             color: var(--grey);
         }
-
     </style>
 
-    <link rel="stylesheet" href="/styles/style.css" media="print" onload="this.media='all'">
+    <!-- non-critical css -->
+    <link rel="preload" href="/styles/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="/styles/style.css">
+    </noscript>
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
+
+    <!-- security headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 </head>
 
 <body>
@@ -249,6 +267,8 @@
         </div>
         {{ partial "footer" . }}
     </div>
+
+    <!-- non-critical js -->
     <script defer src="/js/prefetch.js"></script>
 </body>
 
