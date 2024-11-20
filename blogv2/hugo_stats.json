@@ -23,7 +23,6 @@
       "title"
     ],
     "classes": [
-      "ajax-link",
       "article-author",
       "article-banner-container",
       "article-banner-head",
@@ -35,6 +34,7 @@
       "article-foot-container",
       "article-head-container",
       "article-id",
+      "article-image",
       "article-image-wrapper",
       "article-information-container",
       "article-link",
@@ -46,7 +46,6 @@
       "article-title",
       "article-title-wrapper",
       "article-word-count",
-      "articleImage",
       "content",
       "first-item",
       "footer",
