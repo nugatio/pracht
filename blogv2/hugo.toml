@@ -1,0 +1,12 @@
+baseURL = 'https://example.org/'
+languageCode = 'de-de'
+title = 'pracht'
+paginate = 10
+
+[minify]
+  disableCSS = false
+  disableJS = false
+
+[params]
+  dateFormat = "02.01.2006"
+  description = "die meinung, ein Blog über alles."

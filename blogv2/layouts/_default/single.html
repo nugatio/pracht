@@ -1,0 +1,44 @@
+{{ define "main" }}
+    <div class="article-container">
+        <div class="article-head-container">
+            <div id="moving-stripes">
+            </div>
+            <div class="article-information-container information-bar-head">
+                <div class="article-number">
+                    Beitrag {{ .Params.Number }}
+                </div>
+                <div class="article-edition">
+                    {{ .Params.Edition }}
+                </div>
+                <div class="article-word-count">
+                    {{ .Content | countwords }} Wörter
+                </div>
+            </div>
+            <div class="article-image-wrapper">
+                <img class="articleImage" src="/images/{{.Params.slug}}.webp" loading="lazy" alt="">
+            </div>
+            <div class="article-banner-container article-banner-head">
+                <div class="article-title-wrapper">
+                    <h2 class="article-title">{{ .Title }}</h2>
+                </div>
+                <div class="article-subtitle-wrapper">
+                    <h3 class="article-subtitle">{{ .Params.Subtitle }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="article-content">{{ .Content }}</div>
+        <div class="article-foot-container">
+            <div class="article-information-container information-bar-foot">
+                <div class="article-date-wrapper">
+                    <time class="article-date">{{ dateFormat .Site.Params.dateFormat .Date }}</time>
+                </div>
+                <div class="article-id">
+                    #{{ .Slug }}
+                </div>
+                <div class="article-author">
+                    — NB
+                </div>
+            </div>
+        </div>
+    </div>
+{{ end }}

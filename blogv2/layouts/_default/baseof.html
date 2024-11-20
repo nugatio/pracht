@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{or .Params.subtitle .Site.Params.description }}">
+    <title>{{ .Title }}</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <div class="site-container">
+        {{ partial "navbar" . }}
+        <div class="content">
+            {{ block "main" . }} {{ end }}
+        </div>
+        {{ partial "footer" . }}
+    </div>
+</body>
+</html>
