@@ -97,7 +97,7 @@ body {
 .nav-link {
     font-size: 16px;
     font-weight: 500;
-    line-height: 100%;
+    line-height: 20px;
 }
 
 .nav-link,
@@ -114,7 +114,7 @@ body {
     letter-spacing: normal;
     word-spacing: normal;
     line-height: normal;
-    line-height: 100%;
+    line-height: 20px;
 }
 
 .navbar-logo-wrapper {
