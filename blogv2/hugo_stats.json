@@ -23,6 +23,7 @@
       "title"
     ],
     "classes": [
+      "ajax-link",
       "article-author",
       "article-banner-container",
       "article-banner-head",
@@ -52,6 +53,7 @@
       "information-bar-foot",
       "information-bar-head",
       "last-item",
+      "link",
       "nav-container",
       "nav-link",
       "nav-link-container",

@@ -2,7 +2,7 @@
 <div class="article-list">
     {{ $paginator := .Paginate .Pages }}
     {{ range $index, $page := $paginator.Pages }}
-    <a href="{{ $page.Permalink }}" class="article-link">
+    <a href="{{ $page.Permalink }}" class="article-link link" data-navigation="true">
         <div
             class="article-list-item {{ if eq $index 0 }}first-item{{ end }} {{ if eq $index (sub (len $paginator.Pages) 1) }}last-item{{ end }}">
             <div class="article-banner-container">

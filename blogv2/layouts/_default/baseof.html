@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de" class="no-js">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
 
     <link rel="preload" href="/fonts/fira-sans-v17-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/fira-sans-v17-latin-500.woff2" as="font" type="font/woff2" crossorigin>
-    
+
     <style>
         @font-face {
             font-family: 'Fira Mono';
@@ -19,7 +20,7 @@
             src: url('/fonts/fira-mono-v14-latin-500.woff2') format('woff2');
             font-display: optional;
         }
-        
+
         @font-face {
             font-family: 'Fira Sans';
             font-style: normal;
@@ -27,7 +28,7 @@
             src: url('/fonts/fira-sans-v17-latin-regular.woff2') format('woff2');
             font-display: optional;
         }
-        
+
         @font-face {
             font-family: 'Fira Sans';
             font-style: normal;
@@ -35,7 +36,7 @@
             src: url('/fonts/fira-sans-v17-latin-500.woff2') format('woff2');
             font-display: optional;
         }
-        
+
         @font-face {
             font-family: 'Fira Sans';
             font-style: normal;
@@ -44,8 +45,13 @@
             font-display: optional;
         }
 
-        .no-js { visibility: hidden; }
-        .fonts-loaded { visibility: visible; }
+        .no-js {
+            visibility: hidden;
+        }
+
+        .fonts-loaded {
+            visibility: visible;
+        }
 
         /* - - - - - - - - - - - - - - - - - - - - - */
         /*               normalization               */
@@ -223,14 +229,13 @@
             font-weight: 500;
             color: var(--grey);
         }
-        
     </style>
 
     <link rel="stylesheet" href="/styles/style.css" media="print" onload="this.media='all'">
-    
+
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
     <link rel="manifest" href="/site.webmanifest">
-    
+
     <script>
         if ("fonts" in document) {
             Promise.all([
@@ -254,5 +259,49 @@
         </div>
         {{ partial "footer" . }}
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const contentDiv = document.querySelector('.content');
+
+            function handleNavigation(event) {
+                if (event.target.tagName === 'A' && event.target.dataset.navigation) {
+                    event.preventDefault();
+                    const targetUrl = event.target.href;
+
+                    fetch(targetUrl)
+                        .then(response => response.text())
+                        .then(html => {
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(html, 'text/html');
+                            const newContent = doc.querySelector('.content');
+
+                            if (newContent) {
+                                contentDiv.innerHTML = newContent.innerHTML;
+                                history.pushState(null, '', targetUrl);
+                            }
+                        })
+                        .catch(err => console.error('Navigation failed:', err));
+                }
+            }
+
+            document.addEventListener('click', handleNavigation);
+
+            window.addEventListener('popstate', () => {
+                fetch(location.href)
+                    .then(response => response.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const newContent = doc.querySelector('.content');
+
+                        if (newContent) {
+                            contentDiv.innerHTML = newContent.innerHTML;
+                        }
+                    })
+                    .catch(err => console.error('Popstate navigation failed:', err));
+            });
+        });
+    </script>
 </body>
+
 </html>
