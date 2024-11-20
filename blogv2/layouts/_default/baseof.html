@@ -37,14 +37,6 @@
             font-display: swap;
         }
 
-        .no-js {
-            visibility: hidden;
-        }
-
-        .fonts-loaded {
-            visibility: visible;
-        }
-
         *,
         *::before,
         *::after {
@@ -248,19 +240,6 @@
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
     <link rel="manifest" href="/site.webmanifest">
-
-    <script>
-        if ("fonts" in document) {
-            Promise.all([
-                document.fonts.load("400 1em 'Fira Sans'"),
-                document.fonts.load("700 1em 'Fira Sans'"),
-                document.fonts.load("500 1em 'Fira Mono'")
-            ]).then(() => {
-                document.documentElement.classList.add('fonts-loaded');
-                sessionStorage.setItem('fonts-loaded', 'true');
-            });
-        }
-    </script>
 </head>
 
 <body>
