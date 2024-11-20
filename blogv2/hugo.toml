@@ -3,7 +3,7 @@ baseURL = "https://pracht.report/"
 languageCode = "de-de"
 defaultContentLanguage = 'de'
 
-paginate = 3
+paginate = 2
 
 [minify]
   disableCSS = false
