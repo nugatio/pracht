@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Themen on </title>
+    <link>//localhost:1313/themen/</link>
+    <description>Recent content in Themen on </description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 23 Sep 2024 16:00:00 +0200</lastBuildDate>
+    <atom:link href="//localhost:1313/themen/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bildung</title>
+      <link>//localhost:1313/themen/bildung/</link>
+      <pubDate>Mon, 23 Sep 2024 16:00:00 +0200</pubDate>
+      <guid>//localhost:1313/themen/bildung/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Wissenschaft</title>
+      <link>//localhost:1313/themen/wissenschaft/</link>
+      <pubDate>Mon, 23 Sep 2024 16:00:00 +0200</pubDate>
+      <guid>//localhost:1313/themen/wissenschaft/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Gesellschaft</title>
+      <link>//localhost:1313/themen/gesellschaft/</link>
+      <pubDate>Thu, 29 Aug 2024 19:00:00 +0200</pubDate>
+      <guid>//localhost:1313/themen/gesellschaft/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Politik</title>
+      <link>//localhost:1313/themen/politik/</link>
+      <pubDate>Thu, 29 Aug 2024 19:00:00 +0200</pubDate>
+      <guid>//localhost:1313/themen/politik/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Künstliche Intelligenz</title>
+      <link>//localhost:1313/themen/k%C3%BCnstliche-intelligenz/</link>
+      <pubDate>Wed, 31 Jul 2024 19:00:00 +0200</pubDate>
+      <guid>//localhost:1313/themen/k%C3%BCnstliche-intelligenz/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tech</title>
+      <link>//localhost:1313/themen/tech/</link>
+      <pubDate>Wed, 31 Jul 2024 19:00:00 +0200</pubDate>
+      <guid>//localhost:1313/themen/tech/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Energie</title>
+      <link>//localhost:1313/themen/energie/</link>
+      <pubDate>Mon, 22 Jul 2024 10:00:00 +0200</pubDate>
+      <guid>//localhost:1313/themen/energie/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Medien</title>
+      <link>//localhost:1313/themen/medien/</link>
+      <pubDate>Wed, 17 Jul 2024 20:00:00 +0200</pubDate>
+      <guid>//localhost:1313/themen/medien/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

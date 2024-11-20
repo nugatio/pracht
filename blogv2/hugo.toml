@@ -1,12 +1,29 @@
-baseURL = 'https://pracht.report/'
-languageCode = 'de-de'
-title = 'pracht'
-paginate = 10
+[site]
+  baseURL = "https://pracht.report/"
+  languageCode = "de-de"
+  title = "pracht"
+  paginate = 10
 
 [minify]
   disableCSS = false
   disableJS = false
+  disableHTML = false
+  disableXML = false
 
 [params]
   dateFormat = "02.01.2006"
   description = "die meinung, ein Blog über alles."
+
+[assetDirs]
+  cssDir = "static/styles"
+  jsDir = "static/js"
+
+[caches]
+  [caches.images]
+    maxAge = "24h"
+
+[taxonomies]
+  category = "themen"
+
+[build]
+  writeStats = true
