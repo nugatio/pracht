@@ -1,124 +1,261 @@
 document.addEventListener('DOMContentLoaded', () => {
     const mainContent = document.querySelector('.content');
+    const prefetchedUrls = new Set([window.location.pathname]);
     
-    // Enhanced mobile detection
-    const isMobile = () => {
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    // Configurable options
+    const CONFIG = {
+      CACHE_NAME: 'site-content-cache-v1',
+      PREFETCH_TIMEOUT: 10,
+      MAX_CACHE_ENTRIES: 500,
+      OFFLINE_FALLBACK_URL: '/offline'
     };
   
-    // Comprehensive URL handling
-    const normalizeUrl = (url) => {
-      try {
-        const parsedUrl = new URL(url, window.location.origin);
-        return parsedUrl.pathname + parsedUrl.search;
-      } catch {
-        return url;
+    // Enhanced logging utility
+    const Logger = {
+      debug: (message, ...args) => {
+        if (window.DEBUG_MODE) {
+          console.log(`[Prefetch Debug] ${message}`, ...args);
+        }
+      },
+      error: (message, ...args) => {
+        console.error(`[Prefetch Error] ${message}`, ...args);
       }
     };
   
-    const updatePageContent = async (url, updateHistory = true) => {
+    const isRoot = (path) => path === '/' || path === '/index.html';
+    
+    const normalize = (url) => {
       try {
-        const normalizedUrl = normalizeUrl(url);
+        const parsedUrl = new URL(url, window.location.origin);
+        return parsedUrl.pathname.endsWith('/') 
+          ? parsedUrl.pathname 
+          : `${parsedUrl.pathname}/`;
+      } catch (error) {
+        Logger.error('URL normalization failed', error);
+        return null;
+      }
+    };
+  
+    const manageCacheSize = async () => {
+      try {
+        const cache = await caches.open(CONFIG.CACHE_NAME);
+        const keys = await cache.keys();
         
-        // Fetch page content
-        const response = await fetch(normalizedUrl, {
+        if (keys.length > CONFIG.MAX_CACHE_ENTRIES) {
+          // Remove oldest entries
+          const keysToRemove = keys.slice(0, keys.length - CONFIG.MAX_CACHE_ENTRIES);
+          await Promise.all(keysToRemove.map(key => cache.delete(key)));
+          
+          Logger.debug(`Cleaned cache. Removed ${keysToRemove.length} entries`);
+        }
+      } catch (error) {
+        Logger.error('Cache management failed', error);
+      }
+    };
+  
+    const prefetchArticle = async (url) => {
+      const normalizedUrl = normalize(url);
+      
+      if (!normalizedUrl || 
+          normalizedUrl.startsWith('mailto:') || 
+          prefetchedUrls.has(normalizedUrl)) {
+        return;
+      }
+  
+      try {
+        const cache = await caches.open(CONFIG.CACHE_NAME);
+        
+        // Check if already cached
+        const cachedResponse = await cache.match(normalizedUrl);
+        if (cachedResponse) {
+          Logger.debug(`Already cached: ${normalizedUrl}`);
+          return;
+        }
+  
+        // Fetch and cache
+        const fetchOptions = {
+          credentials: 'same-origin',
           headers: {
-            'X-Requested-With': 'XMLHttpRequest',
+            'X-Prefetch': 'true',  // Custom header to identify prefetch requests
             'Accept': 'text/html'
           }
-        });
+        };
   
-        if (!response.ok) throw new Error('Failed to fetch p dage');
+        const response = await fetch(normalizedUrl, fetchOptions);
+        
+        if (response.ok && response.status === 200) {
+          await cache.put(normalizedUrl, response.clone());
+          prefetchedUrls.add(normalizedUrl);
+          
+          // Manage cache size after adding new entry
+          await manageCacheSize();
+          
+          Logger.debug(`Prefetched and cached: ${normalizedUrl}`);
+        }
+      } catch (error) {
+        Logger.error(`Prefetch failed for ${normalizedUrl}`, error);
+      }
+    };
+  
+    const updateMainContent = async (url) => {
+      try {
+        const cache = await caches.open(CONFIG.CACHE_NAME);
+        let response;
+  
+        // Try cached version first
+        const cachedResponse = await cache.match(normalize(url));
+        
+        if (cachedResponse) {
+          Logger.debug('Using cached response');
+          response = cachedResponse;
+        } else {
+          // Fetch live if not in cache
+          response = await fetch(url, {
+            credentials: 'same-origin',
+            headers: {
+              'Accept': 'text/html'
+            }
+          });
+        }
+  
+        if (!response.ok) {
+          throw new Error(`Failed to load page: ${response.status}`);
+        }
   
         const html = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
-        
-        // Update page elements
         const newMainContent = doc.querySelector('.content');
-        const newTitle = doc.title;
-  
+        
         if (newMainContent) {
-          // Replace content
+          // Comprehensive page update
+          document.title = doc.title;
           mainContent.innerHTML = newMainContent.innerHTML;
-          document.title = newTitle;
-  
-          // Update browser history explicitly
-          if (updateHistory) {
-            // Use replaceState for mobile to avoid stacking history
-            const method = isMobile() ? 'replaceState' : 'pushState';
-            history[method]({ 
-              path: normalizedUrl, 
-              timestamp: Date.now() 
-            }, '', normalizedUrl);
-          }
-  
-          // Scroll to top
-          window.scrollTo(0, 0);
-  
-          // Trigger custom event for any additional setup
-          document.dispatchEvent(new CustomEvent('pageUpdated', { 
-            detail: { url: normalizedUrl } 
-          }));
+          
+          // Update meta tags
+          updateMetaTags(doc);
+          
+          // Advanced history management
+          history.pushState({ 
+            path: url, 
+            scrollPosition: window.scrollY 
+          }, '', url);
+          
+          // Re-initialize page components
+          setupHoverListeners();
+          triggerPageLoadEvents();
+          
+          // Scroll management
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
         }
       } catch (error) {
-        console.error('Page update failed:', error);
+        Logger.error('Content update failed', error);
         
-        // Fallback mechanism
-        if (isMobile()) {
-          window.location.href = url;
+        // Offline/error fallback
+        try {
+          const offlinePage = await fetch(CONFIG.OFFLINE_FALLBACK_URL);
+          if (offlinePage.ok) {
+            mainContent.innerHTML = await offlinePage.text();
+          }
+        } catch {
+          mainContent.innerHTML = '<p>Unable to load page. Please check your connection.</p>';
         }
       }
     };
   
-    // Link interception
-    const setupLinkInterception = () => {
-      document.addEventListener('click', (e) => {
-        const link = e.target.closest('a');
+    const updateMetaTags = (newDoc) => {
+      const metaSelectors = [
+        'meta[name="description"]', 
+        'meta[property^="og:"]', 
+        'link[rel="canonical"]'
+      ];
+  
+      metaSelectors.forEach(selector => {
+        const existingTags = document.querySelectorAll(selector);
+        const newTags = newDoc.querySelectorAll(selector);
+  
+        existingTags.forEach(tag => tag.remove());
+        newTags.forEach(tag => document.head.appendChild(tag.cloneNode(true)));
+      });
+    };
+  
+    const triggerPageLoadEvents = () => {
+      // Custom event for other scripts to hook into
+      const pageLoadEvent = new CustomEvent('dynamicPageLoad', {
+        detail: { url: window.location.href }
+      });
+      document.dispatchEvent(pageLoadEvent);
+    };
+  
+    const setupHoverListeners = () => {
+      const links = [
+        ...document.querySelectorAll('.article-link'),
+        ...document.querySelectorAll('.pagination .page-item:not(.active) a, .nav-link'),
+        document.querySelector('.navbar-logo-wrapper')
+      ].filter(Boolean);
+      
+      links.forEach(link => {
+        const linkUrl = link?.href;
+        const normalizedUrl = normalize(linkUrl);
         
-        if (link && 
-            link.hostname === window.location.hostname && 
-            !link.href.startsWith('mailto:')) {
-          e.preventDefault();
-          
-          const url = link.href;
-          if (url !== window.location.href) {
-            updatePageContent(url);
-          }
+        if (linkUrl && 
+            !linkUrl.startsWith('mailto:') && 
+            !prefetchedUrls.has(normalizedUrl)) {
+          link.addEventListener('mouseenter', () => {
+            queuePrefetch(normalizedUrl);
+          });
         }
       });
+      
+      !isRoot(window.location.pathname) && queuePrefetch('/');
     };
   
-    // Handle browser back/forward
-    const setupHistoryNavigation = () => {
-      window.addEventListener('popstate', (e) => {
-        if (e.state && e.state.path) {
-          // Prevent duplicate loads
-          if (window.location.pathname !== e.state.path) {
-            updatePageContent(e.state.path, false);
-          }
+    const queuePrefetch = (pathname) => {
+      if (!pathname?.length) return;
+      
+      const schedule = fn => ('requestIdleCallback' in window)
+        ? requestIdleCallback(fn, { timeout: CONFIG.PREFETCH_TIMEOUT })
+        : setTimeout(fn, CONFIG.PREFETCH_TIMEOUT);
+      
+      schedule(() => prefetchArticle(pathname));
+    };
+  
+    // Navigation event handlers
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (link && 
+          link.hostname === window.location.hostname && 
+          !link.href.startsWith('mailto:')) {
+        e.preventDefault();
+        const url = link.href;
+        if (url !== window.location.href) {
+          updateMainContent(url);
         }
-      });
-    };
-  
-    // Handle potential navigation edge cases
-    const setupNavigationFallbacks = () => {
-      // Ensure proper navigation on first load
-      if (isMobile()) {
-        history.replaceState({ 
-          path: window.location.pathname,
-          timestamp: Date.now()
-        }, '', window.location.pathname);
       }
+    });
   
-      // Orientation change might require re-rendering
-      window.addEventListener('orientationchange', () => {
-        updatePageContent(window.location.pathname);
-      });
-    };
+    window.addEventListener('popstate', (e) => {
+      if (e.state && e.state.path) {
+        // Restore scroll position if available
+        if (e.state.scrollPosition !== undefined) {
+          window.scrollTo(0, e.state.scrollPosition);
+        }
+        updateMainContent(e.state.path);
+      }
+    });
   
-    // Initialize navigation handling
-    setupLinkInterception();
-    setupHistoryNavigation();
-    setupNavigationFallbacks();
+    // Performance and connectivity monitoring
+    window.addEventListener('online', () => {
+      Logger.debug('Network connection restored');
+    });
+  
+    window.addEventListener('offline', () => {
+      Logger.error('Network connection lost');
+    });
+  
+    // Initial setup
+    setupHoverListeners();
   });
