@@ -12,8 +12,6 @@
       "head",
       "header",
       "html",
-      "input",
-      "label",
       "link",
       "meta",
       "nav",
@@ -71,8 +69,7 @@
       "site-container"
     ],
     "ids": [
-      "moving-stripes",
-      "tooltip-toggle"
+      "moving-stripes"
     ]
   }
 }
