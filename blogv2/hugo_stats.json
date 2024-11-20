@@ -12,6 +12,8 @@
       "head",
       "header",
       "html",
+      "input",
+      "label",
       "link",
       "meta",
       "nav",
@@ -19,6 +21,7 @@
       "p",
       "path",
       "script",
+      "span",
       "strong",
       "style",
       "svg",
@@ -48,14 +51,12 @@
       "article-title-wrapper",
       "article-word-count",
       "content",
-      "content-loader",
       "first-item",
       "footer",
       "information-bar-foot",
       "information-bar-head",
       "last-item",
       "link",
-      "loader-spinner",
       "nav-container",
       "nav-link",
       "nav-link-container",
@@ -65,10 +66,13 @@
       "navbar-logo-link",
       "navbar-logo-wrapper",
       "no-js",
+      "session-hint",
+      "session-tooltip",
       "site-container"
     ],
     "ids": [
-      "moving-stripes"
+      "moving-stripes",
+      "tooltip-toggle"
     ]
   }
 }

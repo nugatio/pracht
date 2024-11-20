@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const mainContent = document.querySelector('.content');
     const prefetchedUrls = new Set([window.location.pathname]);
-
     const isRoot = (path) => path === '/' || path === '/index.html';
     const normalize = (url) => url?.endsWith('/') ? url : `${url}/`;
     
@@ -14,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const prefetchArticle = async (url) => {
-        // Ignore email links and already prefetched URLs
         if (url.startsWith('mailto:') || prefetchedUrls.has(normalize(url))) return;
 
         try {
@@ -30,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!pathname?.length) return;
         const normalized = normalize(pathname);
         
-        // Prevent multiple prefetches of the same normalized URL
         if (prefetchedUrls.has(normalized)) return;
 
         const schedule = fn => ('requestIdleCallback' in window)
@@ -49,15 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
             
-            // Replace only the main content
             const newMainContent = doc.querySelector('.content');
             if (newMainContent) {
                 mainContent.innerHTML = newMainContent.innerHTML;
-                
-                // Update browser history
                 history.pushState(null, '', url);
-                
-                // Reattach hover listeners to new links
                 setupHoverListeners();
             }
         } catch (error) {
@@ -73,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ].filter(Boolean);
 
         links.forEach(link => {
-            // Ignore email links and links already in prefetchedUrls
             if (link?.href && 
                 !link.href.startsWith('mailto:') && 
                 !prefetchedUrls.has(normalize(link.href))) {
@@ -86,20 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
         !isRoot(window.location.pathname) && queuePrefetch('/');
     };
 
-    // Intercept link clicks for single-page-like navigation
     document.addEventListener('click', (e) => {
         const link = e.target.closest('a');
         if (link && link.hostname === window.location.hostname && !link.href.startsWith('mailto:')) {
             e.preventDefault();
             const url = link.href;
             
-            // Only update for internal links
             if (url !== window.location.href) {
                 updateMainContent(url);
             }
         }
     });
-
-    // Initial setup of hover prefetching
     setupHoverListeners();
 });

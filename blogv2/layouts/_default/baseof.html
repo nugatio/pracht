@@ -166,6 +166,30 @@
             filter: brightness(1.1)
         }
 
+        .session-hint {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .session-hint:focus-within .session-tooltip {
+            display: block;
+        }
+        
+        .session-tooltip {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px;
+            background: var(--black);
+            color: var(--white);
+            font-size: 14px;
+            white-space: nowrap;
+            width: auto;
+            cursor: auto;
+        }                 
+
         .pagination {
             font-weight: 400;
             word-spacing: 2px;
