@@ -1,261 +1,303 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const mainContent = document.querySelector('.content');
-    const prefetchedUrls = new Set([window.location.pathname]);
-    
-    // Configurable options
+// Modern Navigation System
+(function() {
+    // Configuration Object
     const CONFIG = {
-      CACHE_NAME: 'site-content-cache-v1',
-      PREFETCH_TIMEOUT: 10,
-      MAX_CACHE_ENTRIES: 500,
-      OFFLINE_FALLBACK_URL: '/offline'
+      CACHE_NAMESPACE: 'hugo-spa-cache-v1',
+      MAX_CACHE_ENTRIES: 50,
+      DEBUG: false
     };
   
-    // Enhanced logging utility
-    const Logger = {
-      debug: (message, ...args) => {
-        if (window.DEBUG_MODE) {
-          console.log(`[Prefetch Debug] ${message}`, ...args);
+    // Utility Functions
+    const Utils = {
+      log: (message, ...args) => {
+        if (CONFIG.DEBUG) {
+          console.log(`[NavSystem] ${message}`, ...args);
         }
       },
       error: (message, ...args) => {
-        console.error(`[Prefetch Error] ${message}`, ...args);
+        console.error(`[NavSystem Error] ${message}`, ...args);
+      },
+      sanitizeUrl: (url) => {
+        try {
+          const parsedUrl = new URL(url, window.location.origin);
+          return parsedUrl.pathname + parsedUrl.search;
+        } catch {
+          return url;
+        }
       }
     };
   
-    const isRoot = (path) => path === '/' || path === '/index.html';
-    
-    const normalize = (url) => {
-      try {
-        const parsedUrl = new URL(url, window.location.origin);
-        return parsedUrl.pathname.endsWith('/') 
-          ? parsedUrl.pathname 
-          : `${parsedUrl.pathname}/`;
-      } catch (error) {
-        Logger.error('URL normalization failed', error);
+    // Advanced Caching Mechanism
+    class ContentCache {
+      constructor(namespace, maxEntries) {
+        this.namespace = namespace;
+        this.maxEntries = maxEntries;
+      }
+  
+      async get(key) {
+        try {
+          const cache = await caches.open(this.namespace);
+          return await cache.match(key);
+        } catch (error) {
+          Utils.error('Cache retrieval failed', error);
+          return null;
+        }
+      }
+  
+      async set(key, response) {
+        try {
+          const cache = await caches.open(this.namespace);
+          
+          // Manage cache size
+          const keys = await cache.keys();
+          if (keys.length >= this.maxEntries) {
+            // Remove oldest entries
+            await cache.delete(keys[0]);
+          }
+  
+          await cache.put(key, response.clone());
+          Utils.log(`Cached: ${key}`);
+        } catch (error) {
+          Utils.error('Cache storage failed', error);
+        }
+      }
+    }
+  
+    // Navigation State Manager
+    class NavigationState {
+      constructor() {
+        this.state = {
+          history: [],
+          currentIndex: -1
+        };
+        this.initializeState();
+      }
+  
+      initializeState() {
+        const initialState = {
+          url: window.location.pathname,
+          scrollPosition: 0,
+          timestamp: Date.now()
+        };
+        
+        this.state.history.push(initialState);
+        this.state.currentIndex = 0;
+      }
+  
+      addEntry(url, scrollPosition) {
+        const newEntry = {
+          url,
+          scrollPosition,
+          timestamp: Date.now()
+        };
+  
+        // Remove forward history if navigating to a new page
+        this.state.history = this.state.history.slice(0, this.state.currentIndex + 1);
+        
+        this.state.history.push(newEntry);
+        this.state.currentIndex++;
+  
+        // Limit history size
+        if (this.state.history.length > 50) {
+          this.state.history.shift();
+          this.state.currentIndex--;
+        }
+      }
+  
+      getCurrentEntry() {
+        return this.state.history[this.state.currentIndex];
+      }
+  
+      getPreviousEntry() {
+        return this.state.currentIndex > 0 
+          ? this.state.history[this.state.currentIndex - 1]
+          : null;
+      }
+  
+      canGoBack() {
+        return this.state.currentIndex > 0;
+      }
+  
+      canGoForward() {
+        return this.state.currentIndex < this.state.history.length - 1;
+      }
+  
+      goBack() {
+        if (this.canGoBack()) {
+          this.state.currentIndex--;
+          return this.getCurrentEntry();
+        }
         return null;
       }
-    };
   
-    const manageCacheSize = async () => {
-      try {
-        const cache = await caches.open(CONFIG.CACHE_NAME);
-        const keys = await cache.keys();
-        
-        if (keys.length > CONFIG.MAX_CACHE_ENTRIES) {
-          // Remove oldest entries
-          const keysToRemove = keys.slice(0, keys.length - CONFIG.MAX_CACHE_ENTRIES);
-          await Promise.all(keysToRemove.map(key => cache.delete(key)));
-          
-          Logger.debug(`Cleaned cache. Removed ${keysToRemove.length} entries`);
+      goForward() {
+        if (this.canGoForward()) {
+          this.state.currentIndex++;
+          return this.getCurrentEntry();
         }
-      } catch (error) {
-        Logger.error('Cache management failed', error);
+        return null;
       }
-    };
+    }
   
-    const prefetchArticle = async (url) => {
-      const normalizedUrl = normalize(url);
-      
-      if (!normalizedUrl || 
-          normalizedUrl.startsWith('mailto:') || 
-          prefetchedUrls.has(normalizedUrl)) {
-        return;
-      }
-  
-      try {
-        const cache = await caches.open(CONFIG.CACHE_NAME);
+    // Core Navigation System
+    class NavigationSystem {
+      constructor() {
+        this.cache = new ContentCache(
+          CONFIG.CACHE_NAMESPACE, 
+          CONFIG.MAX_CACHE_ENTRIES
+        );
+        this.state = new NavigationState();
+        this.mainContent = document.querySelector('.content');
         
-        // Check if already cached
-        const cachedResponse = await cache.match(normalizedUrl);
-        if (cachedResponse) {
-          Logger.debug(`Already cached: ${normalizedUrl}`);
+        this.initEventListeners();
+      }
+  
+      initEventListeners() {
+        // Link Interception
+        document.addEventListener('click', this.handleLinkClick.bind(this));
+        
+        // Browser History Management
+        window.addEventListener('popstate', this.handlePopState.bind(this));
+      }
+  
+      async handleLinkClick(event) {
+        const link = event.target.closest('a');
+        
+        if (!link || 
+            link.hostname !== window.location.hostname || 
+            link.href.startsWith('mailto:')) {
           return;
         }
   
-        // Fetch and cache
-        const fetchOptions = {
-          credentials: 'same-origin',
-          headers: {
-            'X-Prefetch': 'true',  // Custom header to identify prefetch requests
-            'Accept': 'text/html'
-          }
-        };
+        event.preventDefault();
+        const url = Utils.sanitizeUrl(link.href);
   
-        const response = await fetch(normalizedUrl, fetchOptions);
-        
-        if (response.ok && response.status === 200) {
-          await cache.put(normalizedUrl, response.clone());
-          prefetchedUrls.add(normalizedUrl);
-          
-          // Manage cache size after adding new entry
-          await manageCacheSize();
-          
-          Logger.debug(`Prefetched and cached: ${normalizedUrl}`);
-        }
-      } catch (error) {
-        Logger.error(`Prefetch failed for ${normalizedUrl}`, error);
+        if (url === window.location.pathname) return;
+  
+        await this.navigateTo(url);
       }
-    };
   
-    const updateMainContent = async (url) => {
-      try {
-        const cache = await caches.open(CONFIG.CACHE_NAME);
-        let response;
-  
-        // Try cached version first
-        const cachedResponse = await cache.match(normalize(url));
+      async handlePopState(event) {
+        const currentPath = window.location.pathname;
         
-        if (cachedResponse) {
-          Logger.debug('Using cached response');
-          response = cachedResponse;
-        } else {
-          // Fetch live if not in cache
-          response = await fetch(url, {
-            credentials: 'same-origin',
-            headers: {
-              'Accept': 'text/html'
-            }
-          });
-        }
-  
-        if (!response.ok) {
-          throw new Error(`Failed to load page: ${response.status}`);
-        }
-  
-        const html = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const newMainContent = doc.querySelector('.content');
-        
-        if (newMainContent) {
-          // Comprehensive page update
-          document.title = doc.title;
-          mainContent.innerHTML = newMainContent.innerHTML;
-          
-          // Update meta tags
-          updateMetaTags(doc);
-          
-          // Advanced history management
-          history.pushState({ 
-            path: url, 
-            scrollPosition: window.scrollY 
-          }, '', url);
-          
-          // Re-initialize page components
-          setupHoverListeners();
-          triggerPageLoadEvents();
-          
-          // Scroll management
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-          });
-        }
-      } catch (error) {
-        Logger.error('Content update failed', error);
-        
-        // Offline/error fallback
         try {
-          const offlinePage = await fetch(CONFIG.OFFLINE_FALLBACK_URL);
-          if (offlinePage.ok) {
-            mainContent.innerHTML = await offlinePage.text();
-          }
-        } catch {
-          mainContent.innerHTML = '<p>Unable to load page. Please check your connection.</p>';
+          await this.navigateTo(currentPath, {
+            updateHistory: false,
+            restoreScroll: true
+          });
+        } catch (error) {
+          Utils.error('Navigation failed', error);
+          window.location.reload();
         }
       }
-    };
   
-    const updateMetaTags = (newDoc) => {
-      const metaSelectors = [
-        'meta[name="description"]', 
-        'meta[property^="og:"]', 
-        'link[rel="canonical"]'
-      ];
+      async navigateTo(url, options = {}) {
+        const {
+          updateHistory = true,
+          restoreScroll = false
+        } = options;
   
-      metaSelectors.forEach(selector => {
-        const existingTags = document.querySelectorAll(selector);
-        const newTags = newDoc.querySelectorAll(selector);
+        Utils.log(`Navigating to: ${url}`);
   
-        existingTags.forEach(tag => tag.remove());
-        newTags.forEach(tag => document.head.appendChild(tag.cloneNode(true)));
-      });
-    };
+        try {
+          // Check cache first
+          let response = await this.cache.get(url);
+          
+          if (!response) {
+            // Fetch from network
+            response = await fetch(url, {
+              headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'text/html'
+              }
+            });
   
-    const triggerPageLoadEvents = () => {
-      // Custom event for other scripts to hook into
-      const pageLoadEvent = new CustomEvent('dynamicPageLoad', {
-        detail: { url: window.location.href }
-      });
-      document.dispatchEvent(pageLoadEvent);
-    };
+            if (!response.ok) throw new Error('Fetch failed');
+            
+            // Cache the response
+            await this.cache.set(url, response.clone());
+          }
   
-    const setupHoverListeners = () => {
-      const links = [
-        ...document.querySelectorAll('.article-link'),
-        ...document.querySelectorAll('.pagination .page-item:not(.active) a, .nav-link'),
-        document.querySelector('.navbar-logo-wrapper')
-      ].filter(Boolean);
-      
-      links.forEach(link => {
-        const linkUrl = link?.href;
-        const normalizedUrl = normalize(linkUrl);
-        
-        if (linkUrl && 
-            !linkUrl.startsWith('mailto:') && 
-            !prefetchedUrls.has(normalizedUrl)) {
-          link.addEventListener('mouseenter', () => {
-            queuePrefetch(normalizedUrl);
+          const html = await response.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          
+          const newContent = doc.querySelector('.content');
+          const newTitle = doc.title;
+  
+          if (newContent) {
+            // Update page content
+            this.mainContent.innerHTML = newContent.innerHTML;
+            document.title = newTitle;
+  
+            // Scroll management
+            if (restoreScroll) {
+              const savedState = this.state.getCurrentEntry();
+              if (savedState) {
+                window.scrollTo(0, savedState.scrollPosition);
+              }
+            } else {
+              window.scrollTo(0, 0);
+            }
+  
+            // Update history
+            if (updateHistory) {
+              this.state.addEntry(url, window.scrollY);
+              history.pushState(
+                { url, scrollPosition: window.scrollY }, 
+                '', 
+                url
+              );
+            }
+  
+            // Trigger custom event
+            document.dispatchEvent(new CustomEvent('pageUpdated', { 
+              detail: { url } 
+            }));
+  
+            return true;
+          }
+  
+          return false;
+        } catch (error) {
+          Utils.error('Navigation error', error);
+          
+          // Fallback to full page load
+          window.location.href = url;
+          return false;
+        }
+      }
+  
+      // Additional methods for programmatic navigation
+      back() {
+        const previousEntry = this.state.goBack();
+        if (previousEntry) {
+          this.navigateTo(previousEntry.url, {
+            updateHistory: false,
+            restoreScroll: true
           });
         }
-      });
-      
-      !isRoot(window.location.pathname) && queuePrefetch('/');
-    };
+      }
   
-    const queuePrefetch = (pathname) => {
-      if (!pathname?.length) return;
-      
-      const schedule = fn => ('requestIdleCallback' in window)
-        ? requestIdleCallback(fn, { timeout: CONFIG.PREFETCH_TIMEOUT })
-        : setTimeout(fn, CONFIG.PREFETCH_TIMEOUT);
-      
-      schedule(() => prefetchArticle(pathname));
-    };
-  
-    // Navigation event handlers
-    document.addEventListener('click', (e) => {
-      const link = e.target.closest('a');
-      if (link && 
-          link.hostname === window.location.hostname && 
-          !link.href.startsWith('mailto:')) {
-        e.preventDefault();
-        const url = link.href;
-        if (url !== window.location.href) {
-          updateMainContent(url);
+      forward() {
+        const nextEntry = this.state.goForward();
+        if (nextEntry) {
+          this.navigateTo(nextEntry.url, {
+            updateHistory: false,
+            restoreScroll: true
+          });
         }
       }
-    });
+    }
   
-    window.addEventListener('popstate', (e) => {
-      if (e.state && e.state.path) {
-        // Restore scroll position if available
-        if (e.state.scrollPosition !== undefined) {
-          window.scrollTo(0, e.state.scrollPosition);
-        }
-        updateMainContent(e.state.path);
-      }
-    });
+    // Initialize on DOM load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Expose debug mode
+      window.DEBUG_NAV = (enable = true) => {
+        CONFIG.DEBUG = enable;
+      };
   
-    // Performance and connectivity monitoring
-    window.addEventListener('online', () => {
-      Logger.debug('Network connection restored');
+      // Create global navigation system
+      window.NavigationSystem = new NavigationSystem();
     });
-  
-    window.addEventListener('offline', () => {
-      Logger.error('Network connection lost');
-    });
-  
-    // Initial setup
-    setupHoverListeners();
-  });
+  })();
