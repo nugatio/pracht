@@ -1,85 +1,71 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
     const prefetchedUrls = new Set([window.location.pathname]);
-    const prefetchArticle = async (url) => {
-        const normalizedUrl = url.endsWith('/') ? url : `${url}/`;
+    const isRoot = (path) => path === '/' || path === '/index.html';
+    const normalize = (url) => url?.endsWith('/') ? url : `${url}/`;
 
-        if (prefetchedUrls.has(normalizedUrl)) {
-            return;
+    const getPathname = (link) => {
+        try {
+            return new URL(link?.href ?? '').pathname;
+        } catch {
+            return null;
         }
+    };
+
+    const prefetchArticle = async (url) => {
+        const normalized = normalize(url);
+        if (prefetchedUrls.has(normalized)) return;
 
         try {
-            const response = await fetch(url, {
-                method: 'GET',
-                credentials: 'same-origin'
-            });
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-            const cache = await caches.open('article-cache');
-            await cache.put(url, response.clone());
-            prefetchedUrls.add(normalizedUrl);
-        } catch (error) {
-            console.warn('Prefetch failed:', error);
-        }
-    };
-
-    const prefetchNavigationPages = () => {
-        const paginationLinks = document.querySelectorAll('.pagination .page-item:not(.active) a');
-        const navLinks = [
-            ...document.querySelectorAll('.nav-link'),
-            document.querySelector('.navbar-logo-wrapper')
-        ].filter(Boolean);
-        const navigationLinks = [...paginationLinks, ...navLinks];
-
-        if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
-            navigationLinks.push({ href: '/' });
-        }
-
-        navigationLinks.forEach((link, index) => {
-            const pathname = link.href ? new URL(link.href).pathname : link;
-            if (!prefetchedUrls.has(pathname)) {
-                if ('requestIdleCallback' in window) {
-                    requestIdleCallback(() => prefetchArticle(pathname), {
-                        timeout: 1000 + (index * 500)
-                    });
-                } else {
-                    setTimeout(() => prefetchArticle(pathname), 1000 + (index * 500));
-                }
+            const res = await fetch(url, { credentials: 'same-origin' });
+            if (res.ok) {
+                await (await caches.open('article-cache')).put(url, res.clone());
+                prefetchedUrls.add(normalized);
             }
-        });
+        } catch { }
     };
 
-    const addHoverListeners = () => {
-        const articleLinks = document.querySelectorAll('.article-link');
-        const navElements = [
-            ...document.querySelectorAll('.pagination .page-item:not(.active) a'),
-            ...document.querySelectorAll('.nav-link'),
-            document.querySelector('.navbar-logo-wrapper')
+    const queuePrefetch = (pathname, i = 0) => {
+        if (!pathname?.length || prefetchedUrls.has(normalize(pathname))) return;
+
+        const schedule = fn => ('requestIdleCallback' in window)
+            ? requestIdleCallback(fn, { timeout: 1000 + (i * 500) })
+            : setTimeout(fn, 1000 + (i * 500));
+
+        schedule(() => prefetchArticle(pathname));
+    };
+
+    const getAllLinks = () => [
+        ...document.querySelectorAll('.pagination .page-item:not(.active) a, .nav-link'),
+        document.querySelector('.navbar-logo-wrapper')
+    ].filter(Boolean);
+
+    const prefetchPages = () => {
+        const links = getAllLinks();
+
+        if (!isRoot(window.location.pathname)) {
+            links.push({ href: new URL('/', window.location.href).href });
+        }
+
+        links.forEach((link, i) => queuePrefetch(getPathname(link), i));
+    };
+
+    const setupHoverListeners = () => {
+        const links = [
+            ...document.querySelectorAll('.article-link'),
+            ...getAllLinks()
         ].filter(Boolean);
 
-        articleLinks.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                const pathname = new URL(link.href).pathname;
-                if (!prefetchedUrls.has(pathname)) {
-                    prefetchArticle(pathname);
-                }
-            });
+        links.forEach(link => {
+            link?.href && link.addEventListener('mouseenter', () =>
+                queuePrefetch(getPathname(link))
+            );
         });
 
-        navElements.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                const pathname = new URL(link.href).pathname;
-                if (!prefetchedUrls.has(pathname)) {
-                    prefetchArticle(pathname);
-                }
-            });
-        });
-
-        if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
-            const logoWrapper = document.querySelector('.navbar-logo-wrapper');
-            if (logoWrapper && !prefetchedUrls.has('/')) {
-                prefetchArticle('/');
-            }
-        }
+        !isRoot(window.location.pathname) && queuePrefetch('/');
     };
-    setTimeout(prefetchNavigationPages, 1500);
-    setTimeout(addHoverListeners, 100);
+
+    [
+        [prefetchPages, 1500],
+        [setupHoverListeners, 100]
+    ].forEach(([fn, delay]) => setTimeout(fn, delay));
 });

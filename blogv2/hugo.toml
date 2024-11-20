@@ -42,3 +42,17 @@ paginate = 15
 
 [build]
   writeStats = true
+  noJSConfigInAssets = true
+
+[security]
+  [security.funcs]
+    getenv = ['^HUGO_', '^GO_']
+
+[build.processing]
+  [build.processing.css]
+    bundle = true
+    minify = true
+  
+  [build.processing.js]
+    bundle = true
+    minify = true

@@ -2,28 +2,37 @@
 <html lang="de" class="no-js">
 
 <head>
-    <!-- metadata -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="description" content="{{or .Params.subtitle .Site.Params.description }}">
-    <meta http-equiv="Content-Language" content="de">
     <meta name="color-scheme" content="light">
-
-    <!-- preload critical resources -->
-    <link rel="preload" href="/fonts/fira-sans-v17-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/fira-sans-v17-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+    <meta http-equiv="Content-Language" content="de">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 
     <title>{{ .Title }}</title>
 
-    <!-- critical css -->
+    <link rel="preload" href="/fonts/fira-sans-v17-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/fira-sans-v17-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/styles/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
+
     <style>
-        /* fonts */
+        :root {
+            --grey: #666666;
+            --purple: #CC00AA;
+            --white: #FEFCFA;
+            --off-white: #EEECEA;
+            --black: #000000;
+            --bright-grey: #AEACAA
+        }
+
         @font-face {
             font-family: 'Fira Mono';
             font-style: normal;
             font-weight: 500;
             src: url('/fonts/fira-mono-v14-latin-500.woff2') format('woff2');
-            font-display: swap;
+            font-display: swap
         }
 
         @font-face {
@@ -31,7 +40,7 @@
             font-style: normal;
             font-weight: 400;
             src: url('/fonts/fira-sans-v17-latin-regular.woff2') format('woff2');
-            font-display: swap;
+            font-display: swap
         }
 
         @font-face {
@@ -39,26 +48,31 @@
             font-style: normal;
             font-weight: 700;
             src: url('/fonts/fira-sans-v17-latin-700.woff2') format('woff2');
-            font-display: swap;
+            font-display: swap
         }
 
-        /* normalisation */
         *,
-        *::before,
-        *::after {
+        ::before,
+        ::after {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            box-sizing: border-box
         }
 
         html,
         body {
-            height: 100%;
+            height: 100%
         }
 
         body {
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
+            background: var(--white);
+            font-family: "Fira Sans", sans-serif;
+            font-optical-sizing: none;
+            font-weight: 400;
+            line-height: 16px;
+            color: var(--black)
         }
 
         a,
@@ -67,50 +81,30 @@
         a:hover,
         a:active {
             text-decoration: none;
-            color: inherit;
+            color: inherit
         }
 
         ul,
         ol {
-            list-style: none;
+            list-style: none
         }
 
         img {
             max-width: 100%;
-            height: auto;
-        }
-
-        /* baseof */
-        :root {
-            --grey: #666666;
-            --purple: #CC00AA;
-            --white: #FEFCFA;
-            --off-white: #EEECEA;
-            --black: #000000;
-            --bright-grey: #AEACAA;
-        }
-
-        body {
-            background: var(--white);
-            font-family: "Fira Sans", sans-serif;
-            font-optical-sizing: none;
-            font-weight: 400;
-            line-height: 16px;
-            color: var(--black);
+            height: auto
         }
 
         .site-container {
             padding: 20px;
             max-width: 800px;
-            margin: auto;
+            margin: auto
         }
 
         .content {
             padding-top: 20px;
-            padding-bottom: 20px;
+            padding-bottom: 20px
         }
 
-        /* navigation */
         .nav-container {
             background: var(--off-white);
             display: flex;
@@ -119,12 +113,12 @@
             gap: 25px;
             padding: 2.5px;
             padding-right: 5px;
-            min-height: 25px;
+            min-height: 25px
         }
 
         .nav-link-container {
             display: flex;
-            gap: 7.5px;
+            gap: 7.5px
         }
 
         .nav-link {
@@ -132,7 +126,7 @@
             font-weight: 500;
             line-height: 20px;
             font-family: "Fira Mono", monospace;
-            letter-spacing: -0.75px;
+            letter-spacing: -0.75px
         }
 
         .nav-link,
@@ -140,11 +134,11 @@
         .nav-link:focus,
         .nav-link:visited {
             color: var(--black);
-            transition: color 0.3s ease;
+            transition: color 0.3s ease
         }
 
         .nav-link:hover {
-            color: var(--purple);
+            color: var(--purple)
         }
 
         .navbar-date-container {
@@ -156,7 +150,7 @@
             letter-spacing: normal;
             word-spacing: normal;
             line-height: normal;
-            line-height: 20px;
+            line-height: 20px
         }
 
         .navbar-logo-wrapper {
@@ -165,14 +159,13 @@
             align-items: center;
             justify-content: center;
             padding: 7.5px;
-            transition: filter 0.2s ease-in;
+            transition: filter 0.2s ease-in
         }
 
         .navbar-logo-wrapper:hover {
-            filter: brightness(1.1);
+            filter: brightness(1.1)
         }
 
-        /* pagination */
         .pagination {
             font-weight: 400;
             word-spacing: 2px;
@@ -181,39 +174,38 @@
             gap: 10px;
             list-style: none;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 20px
         }
 
         .page-item {
-            color: var(--grey);
+            color: var(--grey)
         }
 
         .page-item.active {
-            color: var(--purple);
+            color: var(--purple)
         }
 
         .page-item.disabled {
             color: var(--off-white);
-            cursor: not-allowed;
+            cursor: not-allowed
         }
 
-        /* article list */
         .article-list {
             display: flex;
-            flex-direction: column;
+            flex-direction: column
         }
 
         .article-list-item {
             position: relative;
-            padding: 12.5px 0;
+            padding: 12.5px 0
         }
 
         .article-list-item.first-item {
-            padding-top: 0;
+            padding-top: 0
         }
 
         .article-list-item.last-item {
-            padding-bottom: 0;
+            padding-bottom: 0
         }
 
         .article-list-item:not(.last-item)::after {
@@ -223,52 +215,39 @@
             right: 0;
             bottom: 0;
             height: 1px;
-            background: var(--bright-grey);
+            background: var(--bright-grey)
         }
 
         .article-banner-container {
             display: flex;
             flex-direction: column;
-            gap: 7.5px;
+            gap: 7.5px
         }
 
         .article-title {
             font-size: 20px;
             font-weight: 700;
-            transition: color 0.2s ease-in;
+            transition: color 0.2s ease-in
         }
 
         .article-subtitle {
             font-size: 16px;
             font-weight: 400;
-            color: var(--grey);
+            color: var(--grey)
         }
     </style>
 
-    <!-- non-critical css -->
-    <link rel="preload" href="/styles/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
         <link rel="stylesheet" href="/styles/style.css">
     </noscript>
-
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
-
-    <!-- security headers -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 </head>
 
 <body>
     <div class="site-container">
         {{ partial "navbar" . }}
-        <div class="content">
-            {{ block "main" . }} {{ end }}
-        </div>
+        <div class="content">{{ block "main" . }}{{ end }}</div>
         {{ partial "footer" . }}
     </div>
-
-    <!-- non-critical js -->
     <script defer src="/js/prefetch.js"></script>
 </body>
 
