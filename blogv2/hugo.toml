@@ -1,6 +1,8 @@
 title = "pracht"
 baseURL = "https://pracht.report/"
 languageCode = "de-de"
+defaultContentLanguage = 'de'
+
 paginate = 15
 
 [minify]

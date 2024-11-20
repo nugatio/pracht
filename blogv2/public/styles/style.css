@@ -11,9 +11,9 @@
 div#moving-stripes {
     height: 10px;
     background-image: linear-gradient(135deg,
-            var(--off-white) 25%, transparent 25%,
-            transparent 50%, var(--off-white) 50%,
-            var(--off-white) 75%, transparent 75%,
+            var(--bright-grey) 25%, transparent 25%,
+            transparent 50%, var(--bright-grey) 50%,
+            var(--bright-grey) 75%, transparent 75%,
             var(--white));
     background-size: 25px 25px;
     animation: moveStripes 4s linear infinite;
@@ -41,7 +41,7 @@ div#moving-stripes {
 .article-banner-head {
     margin-top: 7.5px;
     padding-bottom: 5px;
-    border-bottom: 1px solid var(--off-white);
+    border-bottom: 1px solid var(--bright-grey);
 }
 
 .article-content {
@@ -67,7 +67,7 @@ div#moving-stripes {
 }
 
 .information-bar-foot {
-    border-top: 1px solid var(--off-white);
+    border-top: 1px solid var(--bright-grey);
     padding-top: 5px;
 }
 

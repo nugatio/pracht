@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="navbar-date-container">
-            {{ now.Format "Monday January 2, 2006"}}
+            {{ time.Now | time.Format "Monday, 2. January 2006"}}
         </div>
     </div>
     <a href="/" class="navbar-logo-link link" aria-label="home">
