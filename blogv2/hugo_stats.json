@@ -60,6 +60,7 @@
       "navbar-date-container",
       "navbar-logo-link",
       "navbar-logo-wrapper",
+      "no-js",
       "site-container"
     ],
     "ids": [
