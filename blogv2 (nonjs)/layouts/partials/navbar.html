@@ -2,17 +2,17 @@
     <div class="nav-container">
         <div class="nav-link-container">
             <div class="nav-link-wrapper">
-                <a href="/" class="nav-link link">[home]</a>
+                <a href="/" class="nav-link link" data-navigation="true">[home]</a>
             </div>
             <div class="nav-link-wrapper">
-                <a href="/themen" class="nav-link link">[themen]</a>
+                <a href="/themen" class="nav-link link" data-navigation="true">[themen]</a>
             </div>
         </div>
         <div class="navbar-date-container">
             {{ now.Format "Monday January 2, 2006"}}
         </div>
     </div>
-    <a href="/" class="navbar-logo-link link" aria-label="home">
+    <a href="/" class="navbar-logo-link link" aria-label="home" data-navigation="true">
         <div class="navbar-logo-wrapper">
             <svg width="125" height="26" viewBox="0 0 125 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M117.031 24.8467H112.143V5.24463H104.777V0.339844H124.379V5.24463H117.031V24.8467Z"

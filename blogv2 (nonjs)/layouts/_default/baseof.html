@@ -53,6 +53,9 @@
             visibility: visible;
         }
 
+        /* - - - - - - - - - - - - - - - - - - - - - */
+        /*               normalization               */
+
         *,
         *::before,
         *::after {
@@ -90,6 +93,9 @@
             height: auto;
         }
 
+        /* - - - - - - - - - - - - - - - - - - - - - */
+        /*                   colors                  */
+
         :root {
             --grey: #666666;
             --purple: #CC00AA;
@@ -97,6 +103,9 @@
             --off-white: #EEECEA;
             --black: #000000;
         }
+
+        /* - - - - - - - - - - - - - - - - - - - - - */
+        /*                   baseof                  */
 
         body {
             background: var(--white);
@@ -117,6 +126,9 @@
             padding-top: 20px;
             padding-bottom: 20px;
         }
+
+        /* - - - - - - - - - - - - - - - - - - - - - */
+        /*              navbar & footer              */
 
         .nav-container {
             background: var(--off-white);
@@ -169,6 +181,9 @@
             justify-content: center;
             padding: 7.5px;
         }
+
+        /* - - - - - - - - - - - - - - - - - - - - - */
+        /*                article list               */
 
         .article-list {
             display: flex;
@@ -244,6 +259,63 @@
         </div>
         {{ partial "footer" . }}
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const contentDiv = document.querySelector('.content');
+
+            function handleNavigation(event) {
+                if (event.target.tagName === 'A' && event.target.dataset.navigation) {
+                    event.preventDefault();
+                    const targetUrl = event.target.href;
+
+                    fetch(targetUrl)
+                        .then(response => response.text())
+                        .then(html => {
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(html, 'text/html');
+                            const newContent = doc.querySelector('.content');
+
+                            if (newContent) {
+                                contentDiv.innerHTML = newContent.innerHTML;
+                                history.pushState(null, '', targetUrl);
+                            }
+                        })
+                        .catch(err => console.error('Navigation failed:', err));
+                }
+            }
+
+            document.addEventListener('click', handleNavigation);
+
+            window.addEventListener('popstate', () => {
+                fetch(location.href)
+                    .then(response => response.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const newContent = doc.querySelector('.content');
+
+                        if (newContent) {
+                            contentDiv.innerHTML = newContent.innerHTML;
+                        }
+                    })
+                    .catch(err => console.error('Popstate navigation failed:', err));
+            });
+        });
+
+        document.addEventListener('mouseover', (event) => {
+            if (event.target.tagName === 'A' && event.target.dataset.navigation) {
+                const url = event.target.href;
+                if (!url) return;
+
+                if (!document.querySelector(`link[rel="prefetch"][href="${url}"]`)) {
+                    const link = document.createElement('link');
+                    link.rel = 'prefetch';
+                    link.href = url;
+                    document.head.appendChild(link);
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
