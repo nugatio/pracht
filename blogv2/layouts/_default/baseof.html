@@ -301,6 +301,20 @@
                     .catch(err => console.error('Popstate navigation failed:', err));
             });
         });
+
+        document.addEventListener('mouseover', (event) => {
+            if (event.target.tagName === 'A' && event.target.dataset.navigation) {
+                const url = event.target.href;
+                if (!url) return;
+
+                if (!document.querySelector(`link[rel="prefetch"][href="${url}"]`)) {
+                    const link = document.createElement('link');
+                    link.rel = 'prefetch';
+                    link.href = url;
+                    document.head.appendChild(link);
+                }
+            }
+        });
     </script>
 </body>
 
