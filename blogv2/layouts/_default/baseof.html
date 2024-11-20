@@ -136,10 +136,14 @@
 
         .nav-link,
         .nav-link:active,
-        .nav-link:hover,
         .nav-link:focus,
         .nav-link:visited {
             color: var(--black);
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--purple);
         }
 
         .navbar-date-container {
@@ -160,6 +164,35 @@
             align-items: center;
             justify-content: center;
             padding: 7.5px;
+            transition: filter 0.2s ease-in;
+        }
+
+        .navbar-logo-wrapper:hover {
+            filter: brightness(1.1);
+        }
+
+        .pagination {
+            font-weight: 400;
+            word-spacing: 2px;
+            font-size: 16px;
+            display: flex;
+            gap: 10px;
+            list-style: none;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .page-item {
+            color: var(--grey);
+        }
+        
+        .page-item.active {
+            color: var(--purple);
+        }
+        
+        .page-item.disabled {
+            color: var(--off-white);
+            cursor: not-allowed;
         }
 
         .article-list {
@@ -199,6 +232,7 @@
         .article-title {
             font-size: 20px;
             font-weight: 700;
+            transition: color 0.2s ease-in;
         }
 
         .article-subtitle {
@@ -206,6 +240,7 @@
             font-weight: 400;
             color: var(--grey);
         }
+
     </style>
 
     <link rel="stylesheet" href="/styles/style.css" media="print" onload="this.media='all'">

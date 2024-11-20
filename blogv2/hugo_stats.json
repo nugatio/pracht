@@ -10,19 +10,23 @@
       "head",
       "html",
       "img",
+      "li",
       "link",
       "meta",
       "nav",
       "p",
       "path",
       "script",
+      "span",
       "strong",
       "style",
       "svg",
       "time",
-      "title"
+      "title",
+      "ul"
     ],
     "classes": [
+      "active",
       "article-author",
       "article-banner-container",
       "article-banner-head",
@@ -47,6 +51,7 @@
       "article-title-wrapper",
       "article-word-count",
       "content",
+      "disabled",
       "first-item",
       "footer",
       "information-bar-foot",
@@ -62,6 +67,10 @@
       "navbar-logo-link",
       "navbar-logo-wrapper",
       "no-js",
+      "page-item",
+      "page-link",
+      "pagination",
+      "pagination-default",
       "site-container"
     ],
     "ids": [
