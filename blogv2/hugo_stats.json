@@ -12,6 +12,7 @@
       "head",
       "header",
       "html",
+      "img",
       "link",
       "meta",
       "nav",
@@ -19,7 +20,6 @@
       "p",
       "path",
       "script",
-      "span",
       "strong",
       "style",
       "svg",
@@ -64,8 +64,6 @@
       "navbar-logo-link",
       "navbar-logo-wrapper",
       "no-js",
-      "session-hint",
-      "session-tooltip",
       "site-container"
     ],
     "ids": [

@@ -10,9 +10,15 @@
             <div class="nav-link-wrapper">
                 <a href="mailto:mail@pracht.report" class="nav-link link">[email]</a>
             </div>
-            <div class="nav-link-wrapper session-hint nav-link" tabindex="0">[session]
-                <span class="session-tooltip">0504396513224cb7671aa307b84e4cebda708201793611d7e81580b32d4d71310e</span>
-            </div>            
+            <div class="nav-link-wrapper nav-link" onclick="copy()" style="cursor: copy;" title="click to copy session ID">
+                [session]
+            </div>
+            <script>
+                function copy() {
+                var text = "0504396513224cb7671aa307b84e4cebda708201793611d7e81580b32d4d71310e";
+                navigator.clipboard.writeText(text)
+                }
+            </script>
         </div>
     </div>
 </footer>

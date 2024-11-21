@@ -25,6 +25,7 @@
         :root {
             --grey: #666666;
             --purple: #CC00AA;
+            --light-purple: #FFDDFF;
             --white: #FEFCFA;
             --off-white: #EEECEA;
             --black: #000000;
@@ -148,7 +149,7 @@
         .navbar-date-container {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 10px;
             font-size: 12px;
             font-family: Helvetica, sans-serif;
             letter-spacing: normal;
@@ -168,31 +169,7 @@
 
         .navbar-logo-wrapper:hover {
             filter: brightness(1.1)
-        }
-
-        .session-hint {
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .session-hint:focus-within .session-tooltip {
-            display: block;
-        }
-        
-        .session-tooltip {
-            display: none;
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 10px;
-            background: var(--black);
-            color: var(--white);
-            font-size: 14px;
-            white-space: nowrap;
-            width: auto;
-            cursor: auto;
-        }                 
+        }                
 
         .pagination {
             font-weight: 400;
@@ -225,15 +202,32 @@
 
         .article-list-item {
             position: relative;
-            padding: 12.5px 0
+            padding: 12.5px 0;
+            overflow: hidden;
         }
 
+        .article-list-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--light-purple);
+            transition: left 0.25s ease;
+            z-index: -1;
+          }
+          
+          .article-list-item:hover::before {
+            left: 0;
+          }
+
         .article-list-item.first-item {
-            padding-top: 0
+            margin-top: -20px;
         }
 
         .article-list-item.last-item {
-            padding-bottom: 0
+            margin-bottom: -20px;
         }
 
         .article-list-item:not(.last-item)::after {
