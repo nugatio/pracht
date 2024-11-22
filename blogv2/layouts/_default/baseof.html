@@ -10,7 +10,7 @@
     <meta name="keywords" content="Technologie, Wirtschaft, Politik, Künstliche Intelligenz, Wirtschaftspolitik">
 
     <meta property="og:type" content="article">
-    <meta property="og:image" content="/icon.png">
+    <meta property="og:image" content="/media/icons/icon.png">
     <meta property="og:title" content="{{ .Title }}">
     <meta property="og:url" content="{{ .Permalink }}">
     <meta property="og:description" content="{{ or .Params.subtitle .Site.Params.description }}">
@@ -20,10 +20,11 @@
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 
     <link rel="canonical" href="{{ .Permalink }}">
-    <link rel="modulepreload" href="/js/hotwire.js">
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
-    <link rel="preload" href="/fonts/fira-sans-400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/fira-sans-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="modulepreload" href="/scripts/js/hotwire.js">
+    <link rel="icon" href="/media/icons/favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="preload" href="/fonts/fira/fira-sans/fira-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/fira/fira-sans/fira-sans-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/fira/fira-mono/fira-mono-500.woff2" as="font" type="font/woff2" crossorigin>
 
     <meta name="color-scheme" content="light">
 
@@ -41,24 +42,24 @@
         }
 
         @font-face {
-            font-family: 'Fira Mono';
-            font-style: normal;
-            font-weight: 500;
-            src: url('/fonts/fira-mono-500.woff2') format('woff2');
-        }
-
-        @font-face {
             font-family: 'Fira Sans';
             font-style: normal;
             font-weight: 400;
-            src: url('/fonts/fira-sans-400.woff2') format('woff2');
+            src: url('/fonts/fira/fira-sans/fira-sans-400.woff2') format('woff2');
         }
 
         @font-face {
             font-family: 'Fira Sans';
             font-style: normal;
             font-weight: 700;
-            src: url('/fonts/fira-sans-700.woff2') format('woff2');
+            src: url('/fonts/fira/fira-sans/fira-sans-700.woff2') format('woff2');
+        }
+
+        @font-face {
+            font-family: 'Fira Mono';
+            font-style: normal;
+            font-weight: 500;
+            src: url('/fonts/fira/fira-mono/fira-mono-500.woff2') format('woff2');
         }
 
         *,
@@ -350,14 +351,14 @@
         </div>
         {{ partial "footer" . }}
     </div>
-    <script type="module" src="/scripts/hotwire.js"></script>
+    <script type="module" src="/scripts/js/hotwire.js"></script>
     <script type="application/ld+json">
         {
           "@context": "https://schema.org",
           "@type": "Article",
           "headline": "{{ .Title }}",
           "description": "{{ or .Params.subtitle .Site.Params.description }}",
-          "image": "/icon.png",
+          "image": "/media/icons/icon.png",
           "author": {
             "@type": "Person",
             "name": "NB"
@@ -367,7 +368,7 @@
             "name": "pracht report",
             "logo": {
               "@type": "ImageObject",
-              "url": "/icon.png"
+              "url": "/media/icons/icon.png"
             }
           },
           "datePublished": "{{ .Date }}"
