@@ -4,7 +4,7 @@
     "scripts": {
       "build:css": "postcss static/styles/style.css -o static/styles/style.min.css",
       "build:html": "html-minifier-terser --input-dir public --output-dir public --collapse-whitespace --minify-css true --minify-js true",
-      "build": "hugo --minify && npm run build:css && npm run build:html"
+      "build": "npm run build:css && hugo --minify && npm run build:html"
     },
     "devDependencies": {
       "postcss": "^8.4.24",
