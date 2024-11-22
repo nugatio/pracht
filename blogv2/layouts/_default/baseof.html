@@ -3,37 +3,48 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta name="description" content="{{or .Params.subtitle .Site.Params.description }}">
-    <meta name="color-scheme" content="light">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, max-scale=5.0">
+
+    <title>{{ .Title }}</title>
+    <meta name="description" content="{{ or .Params.subtitle .Site.Params.description }}">
+    <meta name="keywords" content="Technologie, Wirtschaft, Politik, Künstliche Intelligenz, Wirtschaftspolitik">
+
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="/icon.png">
+    <meta property="og:title" content="{{ .Title }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="og:description" content="{{ or .Params.subtitle .Site.Params.description }}">
+
     <meta http-equiv="Content-Language" content="de">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 
-    <title>{{ .Title }}</title>
-
-    <link rel="preload" href="/fonts/fira-sans-v17-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/fira-sans-v17-latin-700.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/styles/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="canonical" href="{{ .Permalink }}">
     <link rel="modulepreload" href="/js/hotwire.js">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="preload" href="/fonts/fira-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/fira-sans-700.woff2" as="font" type="font/woff2" crossorigin>
+
+    <meta name="color-scheme" content="light">
 
     <style>
         :root {
-            --grey: #666666;
-            --purple: #CC00AA;
-            --light-purple: #FFDDFF;
-            --white: #FEFCFA;
-            --off-white: #EEECEA;
-            --black: #000000;
-            --bright-grey: #AEACAA;
+            --color-background: #FEFCFA;
+            --color-background-container: #EEECEA;
+            --color-primary: #CC00AA;
+            --color-primary-container: #FFDDFF;
+            --color-on-background-variant: #555555;
+            --color-outline: #AEACAA;
+            --color-on-background: #000000;
+            --font-sans-serif: 'Fira Sans', sans-serif;
+            --font-mono: 'Fira Mono', monospace;
         }
 
         @font-face {
             font-family: 'Fira Mono';
             font-style: normal;
             font-weight: 500;
-            src: url('/fonts/fira-mono-v14-latin-500.woff2') format('woff2');
+            src: url('/fonts/fira-mono-500.woff2') format('woff2');
             font-display: optional;
         }
 
@@ -41,7 +52,7 @@
             font-family: 'Fira Sans';
             font-style: normal;
             font-weight: 400;
-            src: url('/fonts/fira-sans-v17-latin-regular.woff2') format('woff2');
+            src: url('/fonts/fira-sans-400.woff2') format('woff2');
             font-display: optional;
         }
 
@@ -49,7 +60,7 @@
             font-family: 'Fira Sans';
             font-style: normal;
             font-weight: 700;
-            src: url('/fonts/fira-sans-v17-latin-700.woff2') format('woff2');
+            src: url('/fonts/fira-sans-700.woff2') format('woff2');
             font-display: optional;
         }
 
@@ -67,14 +78,14 @@
         }
 
         body {
+            background: var(--color-background);
+            color: var(--color-on-background);
+            font-family: var(--font-sans-serif);
+            font-weight: 400;
+            font-optical-sizing: none;
+            line-height: 16px;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
-            background: var(--white);
-            font-family: "Fira Sans", sans-serif;
-            font-optical-sizing: none;
-            font-weight: 400;
-            line-height: 16px;
-            color: var(--black);
         }
 
         a,
@@ -84,6 +95,7 @@
         a:active {
             text-decoration: none;
             color: inherit;
+            transition: color 0.2s ease;
         }
 
         ul,
@@ -103,18 +115,16 @@
         }
 
         .content {
-            padding-top: 20px;
-            padding-bottom: 20px;
+            padding: 20px 0;
         }
 
         .nav-container {
-            background: var(--off-white);
+            background: var(--color-background-container);
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 25px;
-            padding: 2.5px;
-            padding-right: 5px;
+            padding: 2.5px 5px;
             min-height: 25px;
         }
 
@@ -127,20 +137,14 @@
             font-size: 16px;
             font-weight: 500;
             line-height: 20px;
-            font-family: "Fira Mono", monospace;
+            font-family: var(--font-mono);
             letter-spacing: -0.75px;
-        }
-
-        .nav-link,
-        .nav-link:active,
-        .nav-link:focus,
-        .nav-link:visited {
-            color: var(--black);
+            color: var(--color-on-background);
             transition: color 0.2s ease;
         }
 
         .nav-link:hover {
-            color: var(--purple);
+            color: var(--color-primary);
         }
 
         .navbar-date-container {
@@ -149,14 +153,11 @@
             gap: 10px;
             font-size: 12px;
             font-family: Helvetica, sans-serif;
-            letter-spacing: normal;
-            word-spacing: normal;
-            line-height: normal;
             line-height: 20px;
         }
 
         .navbar-logo-wrapper {
-            background: var(--purple);
+            background: var(--color-primary);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -170,26 +171,24 @@
 
         .pagination {
             font-weight: 400;
-            word-spacing: 2px;
             font-size: 16px;
             display: flex;
             gap: 10px;
-            list-style: none;
             justify-content: center;
             margin-top: 20px;
         }
 
         .page-item {
-            color: var(--grey);
+            color: var(--color-on-background-variant);
         }
 
         .page-item.active {
-            color: var(--purple);
+            color: var(--color-primary);
         }
 
         .page-item.disabled {
-            color: var(--off-white);
-            cursor: not-allowed
+            color: var(--color-background-container);
+            cursor: not-allowed;
         }
 
         .article-list {
@@ -210,7 +209,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background-color: var(--light-purple);
+            background-color: var(--color-primary-container);
             transition: left 0.25s ease;
             z-index: -1;
         }
@@ -234,7 +233,7 @@
             right: 0;
             bottom: 0;
             height: 1px;
-            background: var(--bright-grey);
+            background: var(--color-outline);
         }
 
         .article-banner-container {
@@ -252,22 +251,131 @@
         .article-subtitle {
             font-size: 16px;
             font-weight: 400;
-            color: var(--grey);
+            color: var(--color-on-background-variant);
+        }
+
+        @keyframes moveStripes {
+            0% {
+                background-position: 25px 0;
+            }
+
+            100% {
+                background-position: 0 0;
+            }
+        }
+
+        div#moving-stripes {
+            height: 10px;
+            background-image: linear-gradient(135deg,
+                    var(--color-outline) 25%,
+                    transparent 25%,
+                    transparent 50%,
+                    var(--color-outline) 50%,
+                    var(--color-outline) 75%,
+                    transparent 75%,
+                    transparent 100%);
+            background-size: 25px 25px;
+            animation: moveStripes 4s linear infinite;
+        }
+
+        .article-information-container {
+            font-family: Helvetica, sans-serif;
+            font-size: 14px;
+            letter-spacing: normal;
+            word-spacing: normal;
+            line-height: normal;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .information-bar-head {
+            padding-top: 5px;
+        }
+
+        .article-edition {
+            color: var(--color-primary);
+        }
+
+        .article-banner-head {
+            margin-top: 7.5px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--color-outline);
+        }
+
+        .article-content {
+            display: inline-block;
+            white-space: wrap;
+            text-align: justify;
+            padding: 12.5px 0;
+        }
+
+        .article-content p {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 12.5px;
+            line-height: 125%;
+        }
+
+        .article-content p:last-child {
+            margin-bottom: 0px;
+        }
+
+        .article-id {
+            font-size: 12px;
+        }
+
+        .information-bar-foot {
+            border-top: 1px solid var(--color-outline);
+            padding-top: 5px;
+        }
+
+        .article-number,
+        .article-date-wrapper {
+            flex-grow: 1;
+            flex-basis: 0;
+        }
+
+        .article-word-count,
+        .article-author {
+            flex-grow: 1;
+            flex-basis: 0;
+            text-align: right;
         }
     </style>
-
-    <noscript>
-        <link rel="stylesheet" href="/styles/style.css">
-    </noscript>
 </head>
 
 <body>
     <div class="site-container">
         {{ partial "navbar" . }}
-        <div class="content">{{ block "main" . }}{{ end }}</div>
+        <div class="content">
+            {{ block "main" . }}
+            {{ end }}
+        </div>
         {{ partial "footer" . }}
     </div>
-    <script type="module" src="/js/hotwire.js"></script>
+    <script type="module" src="/scripts/hotwire.js"></script>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "{{ .Title }}",
+          "description": "{{ or .Params.subtitle .Site.Params.description }}",
+          "image": "/icon.png",
+          "author": {
+            "@type": "Person",
+            "name": "NB"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "pracht report",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "/icon.png"
+            }
+          },
+          "datePublished": "{{ .Date }}"
+        }
+    </script>
 </body>
 
 </html>
