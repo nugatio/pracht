@@ -1,7 +1,7 @@
 title = "pracht"
 baseURL = "https://pracht.report/"
 languageCode = "de-de"
-defaultContentLanguage = 'de'
+defaultContentLanguage = "de"
 paginate = 15
 anonymize = true
 
@@ -24,10 +24,6 @@ anonymize = true
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
-
-[assetDirs]
-  cssDir = "static/styles"
-  jsDir = "static/js"
 
 [outputs]
   home = ["HTML", "RSS"]
