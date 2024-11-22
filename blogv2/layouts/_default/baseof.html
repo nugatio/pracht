@@ -30,12 +30,12 @@
 
     <style>
         :root {
-            --color-background: #FEFCFA;
-            --color-background-container: #EEECEA;
-            --color-primary: #CC00AA;
-            --color-primary-container: #FFDDFF;
-            --color-on-background-variant: #555555;
-            --color-outline: #AEACAA;
+            --color-background: #F8F8F8;
+            --color-background-container: #E8E8E8;
+            --color-primary: #800040;
+            --color-primary-container: #FFC0E0;
+            --color-on-background-variant: #404040;
+            --color-outline: #C0C0C0;
             --color-on-background: #000000;
             --font-sans-serif: 'Fira Sans', sans-serif;
             --font-mono: 'Fira Mono', monospace;
@@ -351,6 +351,7 @@
         </div>
         {{ partial "footer" . }}
     </div>
+
     <script type="module" src="/scripts/js/hotwire.js"></script>
     <script type="application/ld+json">
         {
@@ -373,6 +374,14 @@
           },
           "datePublished": "{{ .Date }}"
         }
+    </script>
+    <script>
+        if (!sessionStorage.getItem('primaryHue')) {
+            sessionStorage.setItem('primaryHue', Math.floor(Math.random() * 360));
+        }
+
+        document.documentElement.style.setProperty('--color-primary', `hsl(${sessionStorage.getItem('primaryHue')}, 100%, 25%)`);
+        document.documentElement.style.setProperty('--color-primary-container', `hsl(${sessionStorage.getItem('primaryHue')}, 25%, 90%)`);
     </script>
 </body>
 
