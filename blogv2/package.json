@@ -1,16 +1,16 @@
 {
-    "name": "hugo-site",
+    "name": "hugo-build",
     "version": "1.0.0",
-    "private": true,
     "scripts": {
-      "build:assets": "postcss static/styles/style.css -o static/styles/style.min.css",
-      "postprocess": "npx html-minifier-terser --input-dir public --output-dir public --collapse-whitespace --minify-css true --minify-js true"
+      "build:css": "postcss static/styles/style.css -o static/styles/style.min.css",
+      "build:html": "html-minifier-terser --input-dir public --output-dir public --collapse-whitespace --minify-css true --minify-js true",
+      "build": "hugo --minify && npm run build:css && npm run build:html"
     },
-    "dependencies": {
-      "postcss": "^8.4.18",
-      "postcss-cli": "^9.1.0",
+    "devDependencies": {
+      "postcss": "^8.4.24",
+      "postcss-cli": "^10.1.0",
       "postcss-class-names": "^2.0.0",
-      "html-minifier-terser": "^7.0.0"
+      "html-minifier-terser": "^7.2.0"
     }
   }
   
