@@ -17,7 +17,7 @@
 
     <link rel="preload" href="/fonts/fira-sans-v17-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/fira-sans-v17-latin-700.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/styles/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/styles/style.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="modulepreload" href="/js/hotwire.js">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
 
@@ -260,7 +260,7 @@
     </style>
 
     <noscript>
-        <link rel="stylesheet" href="/styles/style.css">
+        <link rel="stylesheet" href="/styles/style.min.css">
     </noscript>
 </head>
 
@@ -270,7 +270,7 @@
         <div class="content">{{ block "main" . }}{{ end }}</div>
         {{ partial "footer" . }}
     </div>
-    <script type="module" src="/js/hotwire.js"></script>
+    <script type="module" src="/js/hotwire.min.js"></script>
 </body>
 
 </html> 

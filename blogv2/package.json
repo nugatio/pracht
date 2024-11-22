@@ -1,16 +1,7 @@
 {
-    "name": "hugo-build",
-    "version": "1.0.0",
     "scripts": {
-      "build:css": "postcss static/styles/style.css -o static/styles/style.min.css",
-      "build:html": "html-minifier-terser --input-dir public --output-dir public --collapse-whitespace --minify-css true --minify-js true",
-      "build": "npm run build:css && hugo --minify && npm run build:html"
-    },
-    "devDependencies": {
-      "postcss": "^8.4.24",
-      "postcss-cli": "^10.1.0",
-      "postcss-class-names": "^2.0.0",
-      "html-minifier-terser": "^7.2.0"
+        "build:css": "postcss static/styles/style.css -o static/styles/style.min.css",
+        "build:js": "uglify-es /js/hotwire.js -o /js/hotwire.min.js",
+        "build:html": "html-minifier -o static/layouts/ --input-dir static/layouts/ --output-dir static/layouts/minified/ --remove-attributes --remove-comments --collapse-boolean-attributes --decode-entities --html5-boolean-attributes --include-original-attributes"
     }
-  }
-  
+}
