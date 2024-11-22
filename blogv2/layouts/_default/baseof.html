@@ -17,7 +17,7 @@
 
     <link rel="preload" href="/fonts/fira-sans-v17-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/fira-sans-v17-latin-700.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/styles/style.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/styles/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="modulepreload" href="/js/hotwire.js">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
 
@@ -29,7 +29,7 @@
             --white: #FEFCFA;
             --off-white: #EEECEA;
             --black: #000000;
-            --bright-grey: #AEACAA
+            --bright-grey: #AEACAA;
         }
 
         @font-face {
@@ -37,7 +37,7 @@
             font-style: normal;
             font-weight: 500;
             src: url('/fonts/fira-mono-v14-latin-500.woff2') format('woff2');
-            /*  font-display: swap  */
+            font-display: optional;
         }
 
         @font-face {
@@ -45,7 +45,7 @@
             font-style: normal;
             font-weight: 400;
             src: url('/fonts/fira-sans-v17-latin-regular.woff2') format('woff2');
-            /*  font-display: swap  */
+            font-display: optional;
         }
 
         @font-face {
@@ -53,7 +53,7 @@
             font-style: normal;
             font-weight: 700;
             src: url('/fonts/fira-sans-v17-latin-700.woff2') format('woff2');
-            /*  font-display: swap  */
+            font-display: optional;
         }
 
         *,
@@ -61,12 +61,12 @@
         ::after {
             margin: 0;
             padding: 0;
-            box-sizing: border-box
+            box-sizing: border-box;
         }
 
         html,
         body {
-            height: 100%
+            height: 100%;
         }
 
         body {
@@ -77,7 +77,7 @@
             font-optical-sizing: none;
             font-weight: 400;
             line-height: 16px;
-            color: var(--black)
+            color: var(--black);
         }
 
         a,
@@ -86,28 +86,28 @@
         a:hover,
         a:active {
             text-decoration: none;
-            color: inherit
+            color: inherit;
         }
 
         ul,
         ol {
-            list-style: none
+            list-style: none;
         }
 
         img {
             max-width: 100%;
-            height: auto
+            height: auto;
         }
 
         .site-container {
             padding: 20px;
             max-width: 800px;
-            margin: auto
+            margin: auto;
         }
 
         .content {
             padding-top: 20px;
-            padding-bottom: 20px
+            padding-bottom: 20px;
         }
 
         .nav-container {
@@ -118,12 +118,12 @@
             gap: 25px;
             padding: 2.5px;
             padding-right: 5px;
-            min-height: 25px
+            min-height: 25px;
         }
 
         .nav-link-container {
             display: flex;
-            gap: 7.5px
+            gap: 7.5px;
         }
 
         .nav-link {
@@ -131,7 +131,7 @@
             font-weight: 500;
             line-height: 20px;
             font-family: "Fira Mono", monospace;
-            letter-spacing: -0.75px
+            letter-spacing: -0.75px;
         }
 
         .nav-link,
@@ -139,11 +139,11 @@
         .nav-link:focus,
         .nav-link:visited {
             color: var(--black);
-            transition: color 0.2s ease
+            transition: color 0.2s ease;
         }
 
         .nav-link:hover {
-            color: var(--purple)
+            color: var(--purple);
         }
 
         .navbar-date-container {
@@ -155,7 +155,7 @@
             letter-spacing: normal;
             word-spacing: normal;
             line-height: normal;
-            line-height: 20px
+            line-height: 20px;
         }
 
         .navbar-logo-wrapper {
@@ -164,12 +164,12 @@
             align-items: center;
             justify-content: center;
             padding: 7.5px;
-            transition: filter 0.2s ease-in
+            transition: filter 0.2s ease-in;
         }
 
         .navbar-logo-wrapper:hover {
-            filter: brightness(1.1)
-        }                
+            filter: brightness(1.1);
+        }
 
         .pagination {
             font-weight: 400;
@@ -179,15 +179,15 @@
             gap: 10px;
             list-style: none;
             justify-content: center;
-            margin-top: 20px
+            margin-top: 20px;
         }
 
         .page-item {
-            color: var(--grey)
+            color: var(--grey);
         }
 
         .page-item.active {
-            color: var(--purple)
+            color: var(--purple);
         }
 
         .page-item.disabled {
@@ -197,7 +197,7 @@
 
         .article-list {
             display: flex;
-            flex-direction: column
+            flex-direction: column;
         }
 
         .article-list-item {
@@ -216,11 +216,11 @@
             background-color: var(--light-purple);
             transition: left 0.25s ease;
             z-index: -1;
-          }
-          
-          .article-list-item:hover::before {
+        }
+
+        .article-list-item:hover::before {
             left: 0;
-          }
+        }
 
         .article-list-item.first-item {
             margin-top: -20px;
@@ -237,30 +237,30 @@
             right: 0;
             bottom: 0;
             height: 1px;
-            background: var(--bright-grey)
+            background: var(--bright-grey);
         }
 
         .article-banner-container {
             display: flex;
             flex-direction: column;
-            gap: 7.5px
+            gap: 7.5px;
         }
 
         .article-title {
             font-size: 20px;
             font-weight: 700;
-            transition: color 0.2s ease-in
+            transition: color 0.2s ease-in;
         }
 
         .article-subtitle {
             font-size: 16px;
             font-weight: 400;
-            color: var(--grey)
+            color: var(--grey);
         }
     </style>
 
     <noscript>
-        <link rel="stylesheet" href="/styles/style.min.css">
+        <link rel="stylesheet" href="/styles/style.css">
     </noscript>
 </head>
 
@@ -270,7 +270,7 @@
         <div class="content">{{ block "main" . }}{{ end }}</div>
         {{ partial "footer" . }}
     </div>
-    <script type="module" src="/js/hotwire.min.js"></script>
+    <script type="module" src="/js/hotwire.js"></script>
 </body>
 
-</html> 
+</html>

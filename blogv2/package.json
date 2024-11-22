@@ -1,7 +1,0 @@
-{
-    "scripts": {
-        "build:css": "postcss static/styles/style.css -o static/styles/style.min.css",
-        "build:js": "uglify-es /js/hotwire.js -o /js/hotwire.min.js",
-        "build:html": "html-minifier -o static/layouts/ --input-dir static/layouts/ --output-dir static/layouts/minified/ --remove-attributes --remove-comments --collapse-boolean-attributes --decode-entities --html5-boolean-attributes --include-original-attributes"
-    }
-}
