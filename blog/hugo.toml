@@ -1,8 +1,0 @@
-baseURL = 'https://pracht.report/'
-languageCode = 'de-de'
-title = 'pracht'
-paginate = 10
-
-[params]
-  dateFormat = "02.01.2006"
-  description = "die meinung, ein Blog über alles."
